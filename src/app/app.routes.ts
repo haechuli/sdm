@@ -1,9 +1,5 @@
 import { Routes } from '@angular/router';
-//import { DashboardComponent } from './features/dashboard/dashboard.component';
-//import { ProjectComponent } from './features/project/project.component';
-import { MergerequestComponent } from './features/mergerequest/mergerequest.component';
-import { ApprovalsComponent } from './features/approvals/approvals.component';
-import { SettingsComponent } from './features/settings/settings.component';
+
 
 export const routes: Routes = [
   { path : '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -17,7 +13,7 @@ export const routes: Routes = [
   {
    path: 'project',
      loadComponent: () =>
-    import('./features/project/project.component').then(m => m.ProjectComponent),
+    import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
   },
   {
    path: 'mergerequest',
