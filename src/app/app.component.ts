@@ -1,9 +1,10 @@
 
 import { Component,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { BodyComponent } from '../layout/body/body.component';
-import { SidenavComponent } from '../layout/sidenav/sidenav.component';
+
+import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BodyComponent } from './core/layout/body/body.component';
 
 
 interface SideNavToggle {
