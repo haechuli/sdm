@@ -1,1 +1,17 @@
 <p>mergerequest works!</p>
+
+
+<app-grid
+      [columns]="columns"
+      [data]="rows"
+      [enablePagination]="true"
+      [selectable]="false"
+      [virtualScroll]="true"
+      [width]="'600px'"
+      [height]="'600px'"
+      (selectedRowsChange)="onSelected($event)"
+    />
+
+    <ng-template #action let-value let-row="row">
+      <button (click)="doSomething(row); $event.stopPropagation()">Action</button>
+    </ng-template>

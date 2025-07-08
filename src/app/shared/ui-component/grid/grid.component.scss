@@ -1,0 +1,43 @@
+.grid-container {
+  overflow-x: auto;
+  border: 1px solid #ccc;
+  width: 500px;
+  max-height: 200px;  // 세로 길이 
+}
+
+.grid-header {
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.grid-viewport {
+  height: 400px;
+  min-width: 800px;
+  overflow-y: auto;
+}
+
+.grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  th {
+    background-color: #f4f4f4;
+    text-align: left;
+  }
+  tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

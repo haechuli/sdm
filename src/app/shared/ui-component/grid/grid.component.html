@@ -1,0 +1,61 @@
+<div class="grid-container"
+  [style.width]="width"
+  [style.height]="height">
+        <!-- ✅ Virtual Scroll 영역 -->
+    
+    <!-- ✅ 헤더 테이블 -->
+    <div class="grid-header">
+        <table class="grid-table">
+            <thead>
+                <tr>
+                <th *ngIf="selectable" style="width: 40px; position: sticky; top: 0; z-index: 2;">
+                    <input type="checkbox" disabled />
+                </th>
+                <th *ngFor="let col of columns"
+                    [style.width]="col.width || '150px'"
+                    style="position: sticky; top: 0; background: white; z-index: 2;">
+                    {{ col.header }}
+                </th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <cdk-virtual-scroll-viewport *ngIf="virtualScroll"
+                                itemSize="40"
+                                class="grid-viewport"
+                                [style.height]="calcViewportHeight()"> 
+        <table class="grid-table">
+            <tbody>
+            <tr *cdkVirtualFor="let row of pagedData" (click)="onRowClick(row)">
+            <td *ngIf="selectable" style="width: 40px;" (click)="$event.stopPropagation()">
+                <input type="checkbox"
+                    [checked]="isRowSelected(row)"
+                    (change)="onToggleRowSelection($event, row)" 
+                    />
+            </td>
+            <td *ngFor="let col of columns"
+                [ngClass]="col.cellClass"
+                [ngStyle]="col.cellStyle" 
+                [style.width]="col.width || '150px'">
+
+                <ng-container *ngIf="col.templateRef; else defaultCell"
+                            [ngTemplateOutlet]="col.templateRef"
+                            [ngTemplateOutletContext]="{ $implicit: row[col.field], row: row }">
+                </ng-container>
+
+                <ng-template #defaultCell>
+                {{ row[col.field] }}
+                </ng-template>
+            </td>
+            </tr>
+            </tbody>
+        </table>
+    </cdk-virtual-scroll-viewport>
+</div>
+
+<div class="pagination" *ngIf="enablePagination">
+  <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">◀</button>
+  <span>Page {{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">▶</button>
+</div>
