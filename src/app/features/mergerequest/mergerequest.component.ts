@@ -18,15 +18,19 @@ export class MergerequestComponent {
   rows = Array.from({ length: 15 }).map((_, i) => ({
     id: i + 1,
     name: `User ${i + 1}`,
-    email: `user${i + 1}@mail.com`
+    email: `user${i + 1}@mail.com`,
+    hp: `010-3434-434 (${i + 1})`,
+    address: `gdfgfddddddddddddddddddddddddgdfggf (${i + 1})`,
   }));
 
   ngOnInit() {
     this.columns = [
-      { field: 'id', header: 'ID', width: '80px' },
-      { field: 'name', header: 'Name', width: '200px' },
-      { field: 'email', header: 'Email', width: '100px' },
-      { field: 'action', header: 'Action', templateRef: this.actionTemplate }
+      { field: 'id', header: 'ID', width: '80px', visible: true },
+      { field: 'name', header: 'Name', width: '200px', visible: false  },
+      { field: 'email', header: 'Email', width: '200px', visible: true  },
+      { field: 'hp', header: 'Hp', width: '200px', visible: true  },
+      { field: 'address', header: 'Address', width: '600px', visible: true  },
+      { field: 'action', header: 'Action', width: '200px', visible: true , templateRef: this.actionTemplate }
     ];
   }
 

@@ -11,11 +11,14 @@
                 <th *ngIf="selectable" style="width: 40px; position: sticky; top: 0; z-index: 2;">
                     <input type="checkbox" disabled />
                 </th>
-                <th *ngFor="let col of columns"
-                    [style.width]="col.width || '150px'"
-                    style="position: sticky; top: 0; background: white; z-index: 2;">
-                    {{ col.header }}
-                </th>
+                <ng-container *ngFor="let col of columns">
+                    <th *ngIf="col.visible !== false"
+                        [style.width]="col.width || '150px'"
+                        
+                        style="position: sticky; top: 0; background: white; z-index: 2;">
+                        {{ col.header }}
+                    </th>
+                </ng-container>
                 </tr>
             </thead>
         </table>
@@ -34,20 +37,22 @@
                     (change)="onToggleRowSelection($event, row)" 
                     />
             </td>
-            <td *ngFor="let col of columns"
-                [ngClass]="col.cellClass"
-                [ngStyle]="col.cellStyle" 
-                [style.width]="col.width || '150px'">
+            <ng-container *ngFor="let col of columns">
+                <td *ngIf="col.visible !== false"
+                    [ngClass]="col.cellClass"
+                    [ngStyle]="col.cellStyle" 
+                    [style.width]="col.width || '150px'">
 
-                <ng-container *ngIf="col.templateRef; else defaultCell"
-                            [ngTemplateOutlet]="col.templateRef"
-                            [ngTemplateOutletContext]="{ $implicit: row[col.field], row: row }">
-                </ng-container>
+                    <ng-container *ngIf="col.templateRef; else defaultCell"
+                                [ngTemplateOutlet]="col.templateRef"
+                                [ngTemplateOutletContext]="{ $implicit: row[col.field], row: row }">
+                    </ng-container>
 
-                <ng-template #defaultCell>
-                {{ row[col.field] }}
-                </ng-template>
-            </td>
+                    <ng-template #defaultCell>
+                    {{ row[col.field] }}
+                    </ng-template>
+                </td>
+            </ng-container>
             </tr>
             </tbody>
         </table>
