@@ -11,4 +11,7 @@
   </app-combobox>
   <app-number-input formControlName="numberInput" [(ngModel)]="amount" align="left" label="금액왼쪽입력"></app-number-input>
   <app-number-input formControlName="numberInput2" [(ngModel)]="amount2" align="right" label="금액"></app-number-input>
+
+  <app-button  formControlName="button1" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
+  <app-button  formControlName="button2" label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
 </form>

@@ -48,7 +48,7 @@ export class NumberInputComponent implements ControlValueAccessor {
   onChange = (value: number | null) => {};
   onTouched = () => {};
 
-  writeValue(value: number | null): void {
+  public writeValue(value: number | null): void {
     this.internalValue = value;
     this.displayValue = this.formatNumber(value);
     this.setCursorPosition();
