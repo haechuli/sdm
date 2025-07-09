@@ -1,4 +1,5 @@
-<select [disabled]="disabled"
+<select class="select"
+        [disabled]="disabled"
         [value]="value"
         (change)="onSelectChange($event)">
   <option value="" disabled hidden>{{ placeholder }}</option>

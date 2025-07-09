@@ -7,13 +7,14 @@ import { CommonModule } from '@angular/common';
   selector: 'app-input',
   standalone: true,
   imports: [CommonModule, FormsModule],
+  styleUrls: ['./input.component.scss'],
   template: `
-    <label *ngIf="label" class="block mb-1 text-sm font-medium text-gray-700">
+    <label *ngIf="label" class="input">
       {{ label }}
     </label>
     <input
       type="text"
-      class="border border-gray-300 rounded-md px-3 py-2 w-full"
+      class="input"
       [placeholder]="placeholder"
       [disabled]="isDisabled"
       [(ngModel)]="value"

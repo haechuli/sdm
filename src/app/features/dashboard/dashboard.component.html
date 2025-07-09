@@ -1,3 +1,14 @@
 <h1>dashboard works!</h1>
-<app-input label="이메일" placeholder="example@email.com" [formControl]="emailControl" ></app-input>
 
+
+<form [formGroup]="form">
+  <app-input label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>  
+  <app-combobox
+    formControlName="country"
+    [options]="countries"
+    placeholder="Select country"
+    (selectionChange)="onCountryChanged($event)">
+  </app-combobox>
+  <app-number-input formControlName="numberInput" [(ngModel)]="amount" align="left" label="금액왼쪽입력"></app-number-input>
+  <app-number-input formControlName="numberInput2" [(ngModel)]="amount2" align="right" label="금액"></app-number-input>
+</form>

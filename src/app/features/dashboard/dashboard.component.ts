@@ -1,15 +1,42 @@
-import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component ,OnInit, inject} from '@angular/core';
+import { FormControl, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { InputComponent } from '../../shared/ui-component/input/input.component';
+import { ComboBoxComponent } from '../../shared/ui-component/combobox/combobox.component';
+import { NumberInputComponent } from '../../shared/ui-component/number-input/number-input.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, InputComponent],
+  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  
 
-  emailControl = new FormControl('');
+  amount = 123456789;
+  amount2 = 123456789;
+  fb = inject(FormBuilder);
+  
+  form = this.fb.group({
+    country: [''],
+    email:[''],
+    numberInput:[''],
+    numberInput2:[''],
+  });
+
+  countries = [
+      { label: 'South Korea', value: 'kr' },
+      { label: 'USA', value: 'us' },
+      { label: 'Japan', value: 'jp' }
+    ];
+
+  ngOnInit(): void {
+    
+   
+  }
+
+  onCountryChanged(event : Event) {
+
+  }
 }

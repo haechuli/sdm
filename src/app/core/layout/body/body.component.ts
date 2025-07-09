@@ -16,7 +16,7 @@ export class BodyComponent {
 
   getBodyClass() : string {
     let styleClass ='';
-    console.log('collapsed', this.collapsed);
+    //console.log('collapsed', this.collapsed);
 
     if (this.collapsed && this.screenWidth > 768) {
 

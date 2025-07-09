@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 export interface ComboOption {
   label: string;
@@ -9,6 +10,7 @@ export interface ComboOption {
 @Component({
   standalone: true,
   selector: 'app-combobox',
+  imports: [CommonModule],  // 여기에 추가
   templateUrl: './combobox.component.html',
   styleUrls: ['./combobox.component.scss'],
   providers: [
