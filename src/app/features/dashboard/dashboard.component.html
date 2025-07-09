@@ -1,17 +1,21 @@
 <h1>dashboard works!</h1>
 
-
 <form [formGroup]="form">
-  <app-input label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>  
-  <app-combobox
-    formControlName="country"
-    [options]="countries"
-    placeholder="Select country"
-    (selectionChange)="onCountryChanged($event)">
-  </app-combobox>
-  <app-number-input formControlName="numberInput" [(ngModel)]="amount" align="left" label="금액왼쪽입력"></app-number-input>
-  <app-number-input formControlName="numberInput2" [(ngModel)]="amount2" align="right" label="금액"></app-number-input>
+<div class="container">
+    
+    <app-input class="item" label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>  
+    <app-combobox
+        class="item" 
+        formControlName="country"
+        [options]="countries"
+        placeholder="Select country"
+        (selectionChange)="onCountryChanged($event)">
+    </app-combobox>
+    <app-number-input class="item" formControlName="numberInput"  align="left" label="금액왼쪽입력"></app-number-input>
+    <app-number-input class="item" formControlName="numberInput2"  align="left" label="금액"></app-number-input>
 
-  <app-button  formControlName="button1" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
-  <app-button  formControlName="button2" label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
+    <app-button  class="item" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
+    <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
+    
+</div>
 </form>

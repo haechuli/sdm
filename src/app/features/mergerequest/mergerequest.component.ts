@@ -11,9 +11,9 @@ import { GridColumn } from '../../shared/ui-component/grid/grid.model'
 })
 export class MergerequestComponent {
 
-   @ViewChild('action', { static: true }) actionTemplate!: TemplateRef<any>;
+  @ViewChild('action', { static: true }) actionTemplate!: TemplateRef<any>;
   columns: GridColumn[] = [];
-
+  selectedcontents: any[] = []; 
   // 샘플 Grid 데이터 생성
   rows = Array.from({ length: 15 }).map((_, i) => ({
     id: i + 1,
@@ -36,6 +36,7 @@ export class MergerequestComponent {
 
   onSelected(selected: any[]) {
     console.log('Selected rows:', selected);
+    this.selectedcontents = selected;
   }
 
   doSomething(row: any) {

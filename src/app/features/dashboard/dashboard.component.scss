@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  gap: 12px;
+}
+
+
+.item {
+  flex: 1; /* 각 항목이 동일한 비율로 공간을 나눔 */
+}

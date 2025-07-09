@@ -1,10 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {  ControlValueAccessor,  FormsModule,  NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <button
       [disabled]="disabled"
