@@ -1,0 +1,42 @@
+<div class="datepicker">
+  <label *ngIf="label">{{ label }}</label>
+  <div class="input-wrapper" (click)="toggleCalendar()">
+    <input
+      readonly
+      [value]="value ? (value | date: 'yyyy-MM-dd') : ''"
+      class="input-box"
+    />
+    <div class="calendar-icon">📅</div>
+  </div>
+
+  <div class="calendar" *ngIf="isOpen">
+    <div class="calendar-header">
+      <button (click)="prevMonth()">◀</button>
+      <span>{{ currentYear }}년 {{ currentMonth + 1 }}월</span>
+      <button (click)="nextMonth()">▶</button>
+    </div>
+
+    <table class="calendar-grid">
+      <thead>
+        <tr>
+          <th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let week of weeks">
+          <td *ngFor="let day of week">
+            <button
+              *ngIf="day"
+              [class.today]="value && isSameDate(day, value)"
+              (click)="selectDate(day)"
+            >
+              {{ day.getDate() }}
+            </button>
+            <span *ngIf="!day"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

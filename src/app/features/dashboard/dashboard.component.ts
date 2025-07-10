@@ -4,21 +4,23 @@ import { InputComponent } from '../../shared/ui-component/input/input.component'
 import { ComboBoxComponent } from '../../shared/ui-component/combobox/combobox.component';
 import { NumberInputComponent } from '../../shared/ui-component/number-input/number-input.component';
 import { ButtonComponent } from '../../shared/ui-component/button/button.component';
+import { DatepickerComponent } from '../../shared/ui-component/datepicker/datepicker.component';
+import { CustomDateFormatPipe } from '../../shared/pipes/custom-date-format.pipe';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent,ButtonComponent],
+  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent,ButtonComponent, DatepickerComponent,CustomDateFormatPipe],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent implements OnInit {
-  
+
 
   amount = 123456789;
   amount2 = 123456789;
   fb = inject(FormBuilder);
-  
+
   form = this.fb.group({
     country: [''],
     email:[''],
@@ -34,12 +36,12 @@ export class DashboardComponent implements OnInit {
       { label: 'Japan', value: 'jp' }
     ];
 
-  
+  selectedDate: Date = new Date();
 
   ngOnInit(): void {
-    
-    
-   
+
+
+
   }
 
   onCountryChanged(event : Event) {

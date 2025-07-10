@@ -2,10 +2,10 @@
 
 <form [formGroup]="form">
 <div class="container">
-    
-    <app-input class="item" label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>  
+
+    <app-input class="item" label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>
     <app-combobox
-        class="item" 
+        class="item"
         formControlName="country"
         [options]="countries"
         placeholder="Select country"
@@ -16,6 +16,8 @@
 
     <app-button  class="item" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
     <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
-    
+    <app-datepicker label="날짜 선택"  [(value)]="selectedDate"/>
+
+
 </div>
 </form>
