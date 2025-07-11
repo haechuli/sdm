@@ -31,6 +31,111 @@ export class SidenavComponent {
           label: 'WriteOff',
           icon: '📋',
           children: [
+            { label: 'Ayda', route: '/mergerequest', icon: '👤' },
+            { label: 'WriteOff', route: '/dashboard', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/disburse', icon: '📜' }
+          ]
+        }
+      ]
+    }
+    ,{
+      label: 'Deposit',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
+            { label: 'Ayda', route: '/admin/users', icon: '👤' },
+            { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/admin/logs', icon: '📜' }
+          ]
+        }
+      ]
+    }
+    ,{
+      label: 'Account',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
+            { label: 'Ayda', route: '/admin/users', icon: '👤' },
+            { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/admin/logs', icon: '📜' }
+          ]
+        }
+      ]
+    }
+    ,{
+      label: 'common',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
+            { label: 'Ayda', route: '/admin/users', icon: '👤' },
+            { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/admin/logs', icon: '📜' }
+          ]
+        }
+      ]
+    }
+    ,{
+      label: 'Factory',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
+            { label: 'Ayda', route: '/admin/users', icon: '👤' },
+            { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/admin/logs', icon: '📜' }
+          ]
+        }
+      ]
+    }
+    ,{
+      label: 'Treasery',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
             { label: 'Ayda', route: '/admin/users', icon: '👤' },
             { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
           ]
