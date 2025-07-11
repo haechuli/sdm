@@ -1,57 +1,74 @@
-import { Component,CUSTOM_ELEMENTS_SCHEMA, effect, EventEmitter, inject, OnInit, Output, output, signal } from '@angular/core';
-import { navBarData } from './nav-data';
+//[CommonModule,RouterModule,FontAwesomeModule,RouterLink],
+//schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import { navdata } from './navdata';
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { Router } from '@angular/router';
 
-
-interface SideNavToggle {
-  screenWidth: number;
-  collapsed: boolean;
+interface MenuItem {
+  label: string;
+  icon?: string;
+  route?: string;
+  expanded?: boolean;
+  children?: MenuItem[];
 }
 
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [CommonModule,RouterModule,FontAwesomeModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule,RouterModule,FontAwesomeModule],
   templateUrl: './sidenav.component.html',
-  styleUrl: './sidenav.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
+  menu: MenuItem[] = [
+    {
+      label: 'Loan',
+      icon: '🗂️',
+      children: [
+        {
+          label: 'WriteOff',
+          icon: '📋',
+          children: [
+            { label: 'Ayda', route: '/admin/users', icon: '👤' },
+            { label: 'WriteOff', route: '/admin/roles', icon: '🔒' }
+          ]
+        },
+        {
+          label: 'Disbursement',
+          icon: '🛠️',
+          children: [
+            { label: 'Limit', route: '/admin/logs', icon: '📜' }
+          ]
+        }
+      ]
+    }
+  ];
 
-  //@Output() onToggleSideNav : EventEmitter<SideNavToggle> = new EventEmitter();
-  onToggleSideNav = output<SideNavToggle>({
-    alias : 'onToggleSideNav'
-  });
+  constructor(public router: Router) {}
 
-  collapsed = signal(true);
-  navlist  = signal<navdata[]>(navBarData);
-  //router = inject(Router);
-  screenWidth =0;
-
-
-  ngOnInit() {
-    console.log('navData', this.navlist()[0].title);
-    this.screenWidth = window.innerWidth;
+  toggleTopLevel(clickedItem: MenuItem) {
+    for (const item of this.menu) {
+      if (item !== clickedItem) {
+        item.expanded = false;
+      }
+    }
+    clickedItem.expanded = !clickedItem.expanded;
   }
 
-  onToggleSideNavEff = effect(() => {
-    this.onToggleSideNav.emit({screenWidth: this.screenWidth, collapsed: this.collapsed()});
-  });
-
-
-  toggleCollapse() {
-     this.collapsed.set(!this.collapsed());
-  //   console.log('collapsed1=', this.collapsed());
-
-  //   this.onToggleSideNav.emit({screenWidth: this.screenWidth, collapsed: this.collapsed()});
+  toggleChild(item: MenuItem) {
+    item.expanded = !item.expanded;
   }
 
-  closeSidenav() {
-     this.collapsed.set(false);
-  //   this.onToggleSideNav.emit({screenWidth: this.screenWidth, collapsed: this.collapsed()});
+  isActive(route?: string): boolean {
+    return route ? this.router.url === route : false;
+  }
+
+  toggleSidenav() {
+    const sidenav = document.querySelector('.sidenav');
+    if (sidenav) {
+      sidenav.classList.toggle('collapsed');
+    }
   }
 }

@@ -1,24 +1,37 @@
-<div class="sidenav" [ngClass]="collapsed() ? 'sidenav-collapsed' : ''">
-  <div class="logo-container">
-      <button class="logo" (click)="toggleCollapse()">S</button>
-      @if (collapsed()) {
-        <div class="logo-text" >SDM</div>
-        <button class="btn-close" (click)="closeSidenav()" >
-          <i class="fas fa-times close-icon "></i>
-        </button>
-     }
+<nav class="sidenav">
+  <div class="sidenav-header">
+    <h1>MY APP</h1>
+    <button (click)="toggleSidenav()">Toggle Menu</button>
   </div>
-  <ul class="sidenav-nav" >
-    @for (item of navlist(); track item) {
-    <li class="nav-item"  >
-      <a class="nav-link"  [routerLink]="[item.routerlink]" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">
-        <i class="nav-link-icon" [class]="item.icon"></i>
-        <!-- <fa-icon class="nav-link-icon" [icon]="['fab','github']"></fa-icon> -->
-        @if (collapsed()) {
-        <span class="nav-text" >{{item.title}}</span>
-        }
-      </a>
+  <ul style="margin-top: 10px;">
+    <li *ngFor="let item of menu">
+      <div class="menu-item" (click)="toggleTopLevel(item)">
+        <span class="icon">{{ item.icon }}</span>
+        {{ item.label }}
+        <span *ngIf="item.children">▾</span>
+      </div>
+
+      <ul class="sub-menu" [class.open]="item.expanded">
+        <li *ngFor="let child of item.children">
+          <div class="menu-item" (click)="toggleChild(child)">
+            <span class="icon">{{ child.icon }}</span>
+            {{ child.label }}
+            <span *ngIf="child.children">▾</span>
+          </div>
+
+          <ul class="sub-menu" [class.open]="child.expanded">
+            <li *ngFor="let sub of child.children">
+              <a
+                [routerLink]="sub.route"
+                [class.active]="isActive(sub.route)"
+              >
+                <span class="icon">{{ sub.icon }}</span>
+                {{ sub.label }}
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
     </li>
-  }
   </ul>
-</div>
+</nav>
