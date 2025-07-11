@@ -31,7 +31,7 @@ export const routes: Routes = [
     import('./features/settings/settings.component').then(m => m.SettingsComponent),
   },
   {
-    path: 'disburse',
+    path: 'loan/disburse',
       loadComponent: () =>
      import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
    },

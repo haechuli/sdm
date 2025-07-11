@@ -39,7 +39,7 @@ export class SidenavComponent {
           label: 'Disbursement',
           icon: '🛠️',
           children: [
-            { label: 'Limit', route: '/disburse', icon: '📜' }
+            { label: 'Limit', route: '/loan/disburse', icon: '📜' }
           ]
         }
       ]
