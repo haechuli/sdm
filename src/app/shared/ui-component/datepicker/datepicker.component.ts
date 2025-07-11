@@ -2,6 +2,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-datepicker',
   standalone: true,
@@ -13,6 +14,7 @@ export class DatepickerComponent {
   @Input() label: string = '날짜 선택';
   @Input() value: Date | null = null;
   @Output() valueChange = new EventEmitter<Date>();
+  @Input() locale: string = 'ko'; // 기본은 한국어
 
   isOpen = false;
 
@@ -87,6 +89,22 @@ export class DatepickerComponent {
       weeks.push(this.days.slice(i, i + 7));
     }
     return weeks;
+  }
+
+  getWeekdayNames(): string[] {
+    const baseDate = new Date(Date.UTC(2024, 0, 7)); // 일요일 기준
+    const formatter = new Intl.DateTimeFormat(this.locale, { weekday: 'short' });
+
+    return Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(baseDate);
+      date.setDate(baseDate.getDate() + i);
+      return formatter.format(date);
+    });
+  }
+
+  getMonthName(): string {
+    const date = new Date(this.currentYear, this.currentMonth);
+    return new Intl.DateTimeFormat(this.locale, { month: 'long', year: 'numeric' }).format(date);
   }
 
 }

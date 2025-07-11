@@ -3,7 +3,7 @@
   <div class="input-wrapper" (click)="toggleCalendar()">
     <input
       readonly
-      [value]="value ? (value | date: 'yyyy-MM-dd') : ''"
+      [value]="value ? (value | date: 'dd-MM-yyyy') : ''"
       class="input-box"
     />
     <div class="calendar-icon">📅</div>
@@ -12,14 +12,14 @@
   <div class="calendar" *ngIf="isOpen">
     <div class="calendar-header">
       <button (click)="prevMonth()">◀</button>
-      <span>{{ currentYear }}년 {{ currentMonth + 1 }}월</span>
+      <span>{{ getMonthName() }}</span>
       <button (click)="nextMonth()">▶</button>
     </div>
 
     <table class="calendar-grid">
       <thead>
         <tr>
-          <th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th>
+          <th *ngFor="let dayName of getWeekdayNames()">{{ dayName }}</th>
         </tr>
       </thead>
       <tbody>
