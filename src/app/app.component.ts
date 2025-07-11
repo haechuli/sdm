@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './core/layout/body/body.component';
+import { LayoutComponent } from './core/layout/layout/layout.component';
 
 
 interface SideNavToggle {
@@ -16,8 +17,8 @@ interface SideNavToggle {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,SidenavComponent,
-            BodyComponent],
+  imports: [RouterOutlet,
+            LayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 

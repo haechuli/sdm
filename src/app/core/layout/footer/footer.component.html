@@ -1,0 +1,13 @@
+<footer class="footer">
+  <app-combobox
+        class="item"
+        formControlName="country"
+        [options]="branches"
+        placeholder="Select country"
+        (selectionChange)="onBranchChanged($event)">
+  </app-combobox>
+
+  <label>거래일자:</label>
+    <app-datepicker label=""  locale="id" [(value)]="tradingDate"/>
+
+</footer>

@@ -10,7 +10,7 @@ import { CustomDateFormatPipe } from '../../shared/pipes/custom-date-format.pipe
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent,ButtonComponent, DatepickerComponent,CustomDateFormatPipe],
+  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent,ButtonComponent, DatepickerComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
