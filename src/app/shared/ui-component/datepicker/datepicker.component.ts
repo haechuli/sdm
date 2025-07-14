@@ -1,5 +1,5 @@
 // src/app/shared/components/datepicker/datepicker.component.ts
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -15,8 +15,11 @@ export class DatepickerComponent {
   @Input() value: Date | null = null;
   @Output() valueChange = new EventEmitter<Date>();
   @Input() locale: string = 'ko'; // 기본은 한국어
+  @ViewChild('inputWrapper', { static: false }) inputWrapper!: ElementRef;
+  @ViewChild('calendar', { static: false }) calendar!: ElementRef;
 
   isOpen = false;
+  showAbove = false;
 
   currentMonth: number;
   currentYear: number;
@@ -31,6 +34,50 @@ export class DatepickerComponent {
 
   toggleCalendar() {
     this.isOpen = !this.isOpen;
+    if (this.isOpen) {
+      // 약간의 지연을 주어 DOM이 렌더링된 후 위치를 계산
+      setTimeout(() => {
+        this.calculatePosition();
+      }, 0);
+    }
+  }
+
+  calculatePosition() {
+    if (!this.inputWrapper || !this.calendar) return;
+
+    const inputRect = this.inputWrapper.nativeElement.getBoundingClientRect();
+    const calendarHeight = 250; // 캘린더의 대략적인 높이
+    const viewportHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    
+    // 화면 아래쪽에 충분한 공간이 있는지 확인
+    const spaceBelow = viewportHeight - (inputRect.bottom - scrollY);
+    const spaceAbove = inputRect.top - scrollY;
+    
+    // 아래쪽 공간이 부족하고 위쪽에 충분한 공간이 있으면 위에 표시
+    this.showAbove = spaceBelow < calendarHeight && spaceAbove > calendarHeight;
+  }
+
+  @HostListener('window:scroll', [])
+  @HostListener('window:resize', [])
+  onWindowChange() {
+    if (this.isOpen) {
+      this.calculatePosition();
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (this.isOpen && this.inputWrapper && this.calendar) {
+      const target = event.target as HTMLElement;
+      const inputElement = this.inputWrapper.nativeElement;
+      const calendarElement = this.calendar.nativeElement;
+      
+      // 클릭한 요소가 input wrapper나 calendar 내부가 아니면 캘린더를 닫음
+      if (!inputElement.contains(target) && !calendarElement.contains(target)) {
+        this.isOpen = false;
+      }
+    }
   }
 
   selectDate(day: Date) {

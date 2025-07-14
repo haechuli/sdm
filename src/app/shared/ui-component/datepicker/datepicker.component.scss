@@ -39,6 +39,11 @@
   border-radius: 4px;
   padding: 10px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  
+  &.show-above {
+    top: auto;
+    bottom: 110%;
+  }
 }
 
 .calendar-header {

@@ -1,0 +1,128 @@
+<div class="login-container">
+  <!-- 언어 선택기 -->
+  <div class="language-selector-wrapper">
+    <app-language-selector></app-language-selector>
+  </div>
+
+  <div class="login-content">
+    <!-- 왼쪽 이미지 섹션 -->
+    <div class="left-section">
+      <div class="image-container">
+        <div class="financial-image">
+          <svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- 금융 관련 SVG 이미지 -->
+            <defs>
+              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+              </linearGradient>
+              <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+              </linearGradient>
+            </defs>
+            
+            <!-- 배경 -->
+            <rect width="400" height="300" fill="url(#grad1)" opacity="0.1"/>
+            
+            <!-- 차트 바 -->
+            <rect x="50" y="200" width="30" height="80" fill="url(#grad1)" rx="5"/>
+            <rect x="90" y="150" width="30" height="130" fill="url(#grad1)" rx="5"/>
+            <rect x="130" y="120" width="30" height="160" fill="url(#grad1)" rx="5"/>
+            <rect x="170" y="100" width="30" height="180" fill="url(#grad1)" rx="5"/>
+            <rect x="210" y="140" width="30" height="140" fill="url(#grad1)" rx="5"/>
+            
+            <!-- 동전 아이콘들 -->
+            <circle cx="280" cy="80" r="25" fill="url(#grad2)" opacity="0.8"/>
+            <circle cx="280" cy="80" r="15" fill="none" stroke="white" stroke-width="2"/>
+            <text x="280" y="85" text-anchor="middle" fill="white" font-size="12" font-weight="bold">$</text>
+            
+            <circle cx="330" cy="120" r="20" fill="url(#grad2)" opacity="0.6"/>
+            <circle cx="330" cy="120" r="12" fill="none" stroke="white" stroke-width="1.5"/>
+            <text x="330" y="125" text-anchor="middle" fill="white" font-size="10" font-weight="bold">€</text>
+            
+            <!-- 상승 화살표 -->
+            <path d="M 320 160 L 350 140 L 340 145 L 360 130 L 355 140 L 350 140 Z" fill="url(#grad2)"/>
+            
+            <!-- 그래프 라인 -->
+            <polyline points="50,220 90,180 130,160 170,140 210,170 250,150 290,130" 
+                     fill="none" stroke="url(#grad1)" stroke-width="3" opacity="0.7"/>
+            
+            <!-- 점들 -->
+            <circle cx="50" cy="220" r="4" fill="url(#grad1)"/>
+            <circle cx="90" cy="180" r="4" fill="url(#grad1)"/>
+            <circle cx="130" cy="160" r="4" fill="url(#grad1)"/>
+            <circle cx="170" cy="140" r="4" fill="url(#grad1)"/>
+            <circle cx="210" cy="170" r="4" fill="url(#grad1)"/>
+            <circle cx="250" cy="150" r="4" fill="url(#grad1)"/>
+            <circle cx="290" cy="130" r="4" fill="url(#grad1)"/>
+          </svg>
+        </div>
+      </div>
+      <div class="welcome-text">
+        <h1>{{ 'welcome' | translate }}</h1>
+        <h2>{{ 'financial_system' | translate }}</h2>
+        <p>{{ 'login_description' | translate }}</p>
+      </div>
+    </div>
+
+    <!-- 오른쪽 로그인 폼 섹션 -->
+    <div class="right-section">
+      <div class="login-form">
+        <h3>{{ 'login' | translate }}</h3>
+        
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+          <div class="form-group">
+            <label for="userId">{{ 'user_id' | translate }}</label>
+            <input 
+              type="text" 
+              id="userId"
+              name="userId"
+              [(ngModel)]="credentials.userId"
+              [placeholder]="'enter_user_id' | translate"
+              required
+              (keypress)="onKeyPress($event)"
+              autocomplete="username"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="password">{{ 'password' | translate }}</label>
+            <input 
+              type="password" 
+              id="password"
+              name="password"
+              [(ngModel)]="credentials.password"
+              [placeholder]="'enter_password' | translate"
+              required
+              (keypress)="onKeyPress($event)"
+              autocomplete="current-password"
+            />
+          </div>
+
+          <div class="error-message" *ngIf="errorMessage">
+            {{ errorMessage | translate }}
+          </div>
+
+          <app-button 
+            [label]="'login' | translate"
+            [disabled]="isLoading"
+            color="primary"
+            (clicked)="onLogin()"
+            class="login-button">
+          </app-button>
+        </form>
+
+        <!-- 테스트 계정 안내 -->
+        <div class="test-accounts">
+          <p style="font-size: 12px; color: #666; margin-top: 20px;">
+            Test Accounts:<br>
+            admin / admin123<br>
+            user1 / password<br>
+            test / test
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

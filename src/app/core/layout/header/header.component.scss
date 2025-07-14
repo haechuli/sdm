@@ -10,6 +10,13 @@
   z-index: 1000;
   margin-left: 240px;
 }
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .user-info {
   margin-right: 10px;
 }

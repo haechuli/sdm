@@ -1,39 +1,57 @@
 import { Routes } from '@angular/router';
-
+import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
-  { path : '', redirectTo: 'dashboard', pathMatch: 'full' },
-
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  
   {
-   path: 'dashboard',
-     loadComponent: () =>
-    import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    path: 'login',
+    loadComponent: () =>
+      import('./features/login/login.component').then(m => m.LoginComponent),
   },
 
   {
-   path: 'project',
-     loadComponent: () =>
-    import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./features/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    canActivate: [authGuard]
   },
+
   {
-   path: 'mergerequest',
-     loadComponent: () =>
-    import('./features/mergerequest/mergerequest.component').then(m => m.MergerequestComponent),
+    path: 'project',
+    loadComponent: () =>
+      import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
+    canActivate: [authGuard]
   },
+  
   {
-   path: 'approvals',
-     loadComponent: () =>
-    import('./features/approvals/approvals.component').then(m => m.ApprovalsComponent),
+    path: 'mergerequest',
+    loadComponent: () =>
+      import('./features/mergerequest/mergerequest.component').then(m => m.MergerequestComponent),
+    canActivate: [authGuard]
   },
+  
   {
-   path: 'settings',
-     loadComponent: () =>
-    import('./features/settings/settings.component').then(m => m.SettingsComponent),
+    path: 'approvals',
+    loadComponent: () =>
+      import('./features/approvals/approvals.component').then(m => m.ApprovalsComponent),
+    canActivate: [authGuard]
   },
+  
+  {
+    path: 'settings',
+    loadComponent: () =>
+      import('./features/settings/settings.component').then(m => m.SettingsComponent),
+    canActivate: [authGuard]
+  },
+  
   {
     path: 'loan/disburse',
-      loadComponent: () =>
-     import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
-   },
+    loadComponent: () =>
+      import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
+    canActivate: [authGuard]
+  },
 
+  // 404 페이지나 기타 라우트가 필요한 경우 여기에 추가
+  { path: '**', redirectTo: 'login' }
 ];

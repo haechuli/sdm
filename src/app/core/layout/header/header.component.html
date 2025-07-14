@@ -1,7 +1,9 @@
 <header class="header">
-  <div class="left">관리자 시스템</div>
+  <div class="left">{{ 'admin_system' | translate }}</div>
   <div class="right">
-    <span class="user-info">홍길동</span>
-    <app-button label="실행" onclick="run()"></app-button>
+    <app-language-selector></app-language-selector>
+    <span class="user-info" *ngIf="currentUser">{{ currentUser.name }}</span>
+    <app-button [label]="'run' | translate" (clicked)="run()"></app-button>
+    <app-button [label]="'logout' | translate" color="secondary" (clicked)="logout()"></app-button>
   </div>
 </header>

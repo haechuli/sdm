@@ -1,13 +1,39 @@
 <footer class="footer">
-  <app-combobox
-        class="item"
-        formControlName="country"
-        [options]="branches"
-        placeholder="Select country"
-        (selectionChange)="onBranchChanged($event)">
-  </app-combobox>
+  <div class="footer-content">
+    <!-- 왼쪽 섹션: 지점 정보 -->
+    <div class="footer-section left">
+      <div class="branch-selector">
+        <label class="footer-label">{{ 'branch' | translate }}:</label>
+        <app-combobox
+          class="footer-combobox"
+          [options]="branches"
+          [placeholder]="'select_branch' | translate"
+          (selectionChange)="onBranchChanged($event)">
+        </app-combobox>
+        
+      </div>
+    </div>
 
-  <label>거래일자:</label>
-    <app-datepicker label=""  locale="id" [(value)]="tradingDate"/>
+    <!-- 중앙 섹션: 거래일자 -->
+    <div class="footer-section center">
+      <div class="trading-date">
+        <label class="footer-label">{{ 'trading_date' | translate }}:</label>
+        <app-datepicker label=""  locale="id" [(value)]="tradingDate"/>
+      </div>
+    </div>
 
+    <!-- 오른쪽 섹션: 현재 시간 및 시스템 정보 -->
+    <div class="footer-section right">
+      <div class="system-info">
+        <div class="current-time">
+          <span class="time-label">{{ 'current_time' | translate }}:</span>
+          <span class="time-value">{{ currentTime }}</span>
+        </div>
+        <div class="system-status">
+          <span class="status-indicator online"></span>
+          <span class="status-text">{{ 'system_online' | translate }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

@@ -1,32 +1,61 @@
 
-import { Component,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
+import { Subscription, filter } from 'rxjs';
 
 import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './core/layout/body/body.component';
 import { LayoutComponent } from './core/layout/layout/layout.component';
-
+import { AuthService } from './core/auth/auth.service';
 
 interface SideNavToggle {
   screenWidth: number;
   collapsed: boolean;
 }
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,
-            LayoutComponent],
+  imports: [CommonModule, RouterOutlet, LayoutComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'sdm';
   isSideNavCollapsed = false;
   screenWidth = 0;
+  isLoginPage = false;
+  isAuthenticated = false;
+  private subscription: Subscription = new Subscription();
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // 현재 라우트 확인
+    this.subscription.add(
+      this.router.events.pipe(
+        filter(event => event instanceof NavigationEnd)
+      ).subscribe((event: NavigationEnd) => {
+        this.isLoginPage = event.url === '/login';
+      })
+    );
+
+    // 인증 상태 확인
+    this.subscription.add(
+      this.authService.isAuthenticated$.subscribe(isAuth => {
+        this.isAuthenticated = isAuth;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   onToggleSideNav(data: SideNavToggle): void {
     console.log('data', data);

@@ -18,6 +18,13 @@
     <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
     <app-datepicker label="날짜 선택"  locale="id" [(value)]="selectedDate"/>
 
+    <app-customer-search 
+        class="item" 
+        label="customer_search"
+        formControlName="customer"
+        (customerSelected)="onCustomerSelected($event)"
+        (searchRequested)="onCustomerSearchRequested($event)">
+    </app-customer-search>
 
 </div>
 </form>

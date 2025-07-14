@@ -4,72 +4,217 @@
   position: fixed;
   z-index: 1;
   top: 0;
-  background-color: #263238;
-  border-right: 1px solid #ccc;
-  padding: 10px;
+  background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0;
   overflow-y: auto;
   color: #fff;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
 }
 
 ul {
   list-style: none;
-  padding-left: 10px;
+  padding: 0;
   margin: 0;
 }
 
-.menu-item {
-  padding: 8px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 4px;
-  transition: background 0.2s;
-  color: #fff;
+ul:first-of-type {
+  padding: 0 15px;
 }
 
-.menu-item:hover {
-  background: #e5e7eb;
+.menu-item {
+  padding: 12px 8px;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: 
+    all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.2s ease-in-out;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    .menu-icon {
+      color: #fff;
+      transform: scale(1.1);
+    }
+    
+    .expand-arrow {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+
+  // 메뉴 텍스트 영역
+  .menu-text {
+    flex: 1;
+    text-align: left;
+    margin-left: 4px;
+    transition: color 0.3s ease;
+  }
+
+  // 확장 화살표를 오른쪽 끝에 위치
+  .expand-arrow {
+    margin-left: auto;
+  }
 }
 
 .sub-menu {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.3s ease;
-  padding-left: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 
+    max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    opacity 0.3s ease-in-out 0.1s,
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    padding 0.3s ease-in-out;
+  padding-left: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
   color: #fff;
-}
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 8px 8px;
+  margin-top: 0;
 
-.sub-menu.open {
-  max-height: 1000px; /* 충분히 큰 값 */
+  &.open {
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin-top: 4px;
+  }
+
+  // 서브메뉴 아이템들의 순차 애니메이션
+  li {
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: 
+      opacity 0.3s ease-in-out,
+      transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  &.open li {
+    opacity: 1;
+    transform: translateX(0);
+    
+    // 순차적으로 나타나는 효과
+    @for $i from 1 through 10 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{$i * 0.05}s;
+      }
+    }
+  }
 }
 
 a {
-  display: block;
-  padding: 6px;
-  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 6px;
   text-decoration: none;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
+  transition: 
+    all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    background-color 0.2s ease-in-out;
+  text-align: left;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    transform: translateX(3px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    
+    .menu-icon {
+      color: #fff;
+      transform: scale(1.1);
+    }
+  }
+
+  // 링크 내 텍스트 영역
+  .menu-text {
+    flex: 1;
+    text-align: left;
+    margin-left: 4px;
+    transition: color 0.3s ease;
+  }
 }
 
 a.active {
-  background-color: #3b82f6;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  font-weight: bold;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
 }
 
-.icon {
-  margin-right: 6px;
-  width: 20px;
-  display: inline-block;
+// Font Awesome 아이콘 스타일
+.menu-icon {
+  margin-right: 12px;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: 
+    color 0.3s ease,
+    transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// 확장/축소 화살표 스타일
+.expand-arrow {
+  font-size: 12px;
+  transition: 
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    color 0.3s ease;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 8px;
+  min-width: 12px;
   text-align: center;
+  
+  &.expanded {
+    transform: rotate(180deg);
+    color: rgba(255, 255, 255, 0.9);
+  }
 }
 
 .sidenav-header {
   display: flex;
   align-items: center;
-  padding: 0px;
+  justify-content: space-between;
+  padding: 20px 15px;
   font-size: 1.2em;
   font-weight: bold;
   color: white;
-  background: #1f2937;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1;
+
+  h1 {
+    margin: 0;
+    font-size: 1.1em;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  button {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+  }
 }

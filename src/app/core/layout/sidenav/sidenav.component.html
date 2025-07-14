@@ -6,17 +6,17 @@
   <ul style="margin-top: 10px;">
     <li *ngFor="let item of menu">
       <div class="menu-item" (click)="toggleTopLevel(item)">
-        <span class="icon">{{ item.icon }}</span>
-        {{ item.label }}
-        <span *ngIf="item.children">▾</span>
+        <fa-icon [icon]="item.icon!" class="menu-icon"></fa-icon>
+        <span class="menu-text">{{ item.label | translate}}</span>
+        <span *ngIf="item.children" class="expand-arrow" [class.expanded]="item.expanded">▾</span>
       </div>
 
       <ul class="sub-menu" [class.open]="item.expanded">
         <li *ngFor="let child of item.children">
           <div class="menu-item" (click)="toggleChild(child)">
-            <span class="icon">{{ child.icon }}</span>
-            {{ child.label }}
-            <span *ngIf="child.children">▾</span>
+            <fa-icon [icon]="child.icon!" class="menu-icon"></fa-icon>
+            <span class="menu-text">{{ child.label | translate}}</span>
+            <span *ngIf="child.children" class="expand-arrow" [class.expanded]="child.expanded">▾</span>
           </div>
 
           <ul class="sub-menu" [class.open]="child.expanded">
@@ -25,8 +25,8 @@
                 [routerLink]="sub.route"
                 [class.active]="isActive(sub.route)"
               >
-                <span class="icon">{{ sub.icon }}</span>
-                {{ sub.label }}
+                <fa-icon [icon]="sub.icon!" class="menu-icon"></fa-icon>
+                <span class="menu-text">{{ sub.label | translate}}</span>
               </a>
             </li>
           </ul>

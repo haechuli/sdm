@@ -1,0 +1,125 @@
+<div class="customer-search-container">
+  <!-- 라벨 -->
+  <label *ngIf="label" class="customer-label">
+    {{ label | translate }}
+  </label>
+
+  <!-- 고객번호 입력 필드 -->
+  <div class="customer-input-group">
+    <app-input #customerIdInput label="" placeholder="'enter_customer_id' | translate"  [(ngModel)]="customerId"/>
+    
+    <!-- 검색 버튼 -->
+    <app-button
+      [icon]="'fas fa-search'"
+      [label]="'search' | translate"
+      color="primary"
+      [disabled]="disabled"
+      (clicked)="openSearchPopup()"
+      class="search-button">
+    </app-button>
+  </div>
+
+  <!-- 고객명 표시 필드 -->
+  <input
+    #customerInput
+    type="text"
+    class="customer-name-input"
+    [placeholder]="'select_customer' | translate"
+    [disabled]="disabled"
+    [(ngModel)]="customerName"
+    readonly
+  />
+
+  <!-- 선택 해제 버튼 (고객이 선택된 경우에만 표시) -->
+  <button
+    *ngIf="selectedCustomer && !disabled"
+    type="button"
+    class="clear-button"
+    (click)="clearSelection()"
+    [title]="'close' | translate">
+    <i class="fas fa-times"></i>
+  </button>
+
+  <!-- 고객 검색 팝업 -->
+  <div
+    #popup
+    *ngIf="isPopupOpen"
+    class="customer-popup"
+    [class.show-above]="false">
+    
+    <div class="popup-header">
+      <h3>{{ 'customer_search' | translate }}</h3>
+      <button
+        type="button"
+        class="close-btn"
+        (click)="closePopup()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="popup-content">
+      <!-- 검색 입력 -->
+      <div class="search-input-group">
+        <input
+          type="text"
+          class="search-input"
+          [placeholder]=""
+          [(ngModel)]="searchTerm"
+          (input)="searchCustomers()"
+          (keydown.enter)="searchCustomers()"
+        />
+        <app-button
+          [icon]="'fas fa-search'"
+          [label]="'search' | translate"
+          color="primary"
+          (clicked)="searchCustomers()"
+          class="search-btn-popup">
+        </app-button>
+      </div>
+
+      <!-- 고객 목록 -->
+      <div class="customer-list">
+        <div class="list-header">
+          <span>{{ 'customer_list' | translate }}</span>
+          <span class="customer-count">({{ filteredCustomers.length }})</span>
+        </div>
+
+        <div class="list-content">
+          <div
+            *ngFor="let customer of filteredCustomers; trackBy: trackByCustomerId"
+            class="customer-item"
+            (click)="selectCustomer(customer)">
+            
+            <div class="customer-info">
+              <div class="customer-id">{{ customer.id }}</div>
+              <div class="customer-name">{{ customer.name }}</div>
+              <div class="customer-details" *ngIf="customer.phone || customer.address">
+                <span *ngIf="customer.phone" class="phone">{{ customer.phone }}</span>
+                <span *ngIf="customer.address" class="address">{{ customer.address }}</span>
+              </div>
+            </div>
+
+            <app-button
+              [label]="'select' | translate"
+              color="primary"
+              class="select-btn">
+            </app-button>
+          </div>
+
+          <!-- 검색 결과가 없는 경우 -->
+          <div *ngIf="filteredCustomers.length === 0" class="no-results">
+            <i class="fas fa-search"></i>
+            <p>{{ 'no_customers_found' | translate }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 팝업 배경 오버레이 -->
+  <div
+    *ngIf="isPopupOpen"
+    class="popup-overlay"
+    (click)="closePopup()">
+  </div>
+</div>

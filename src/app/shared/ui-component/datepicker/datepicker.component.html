@@ -1,6 +1,6 @@
 <div class="datepicker">
   <label *ngIf="label">{{ label }}</label>
-  <div class="input-wrapper" (click)="toggleCalendar()">
+  <div class="input-wrapper" #inputWrapper (click)="toggleCalendar()">
     <input
       readonly
       [value]="value ? (value | date: 'dd-MM-yyyy') : ''"
@@ -9,7 +9,12 @@
     <div class="calendar-icon">📅</div>
   </div>
 
-  <div class="calendar" *ngIf="isOpen">
+  <div 
+    class="calendar" 
+    #calendar
+    *ngIf="isOpen"
+    [class.show-above]="showAbove"
+  >
     <div class="calendar-header">
       <button (click)="prevMonth()">◀</button>
       <span>{{ getMonthName() }}</span>
