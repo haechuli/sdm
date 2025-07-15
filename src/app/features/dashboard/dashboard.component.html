@@ -67,3 +67,21 @@
 </app-mask-input>
 
 </form>
+
+<!-- Excel 스타일 그리드 예시 -->
+<div class="grid-section">
+    <h3>고객 목록 (Excel 스타일 그리드)</h3>
+    <app-grid
+        [columns]="gridColumns"
+        [data]="gridData"
+        [selectable]="true"
+        [enablePagination]="true"
+        [pageSize]="10"
+        [virtualScroll]="false"
+        width="100%"
+        height="400px"
+        (rowClick)="onGridRowClick($event)"
+        (rowDoubleClick)="onGridRowDoubleClick($event)"
+        (selectedRowsChange)="onGridSelectionChange($event)">
+    </app-grid>
+</div>

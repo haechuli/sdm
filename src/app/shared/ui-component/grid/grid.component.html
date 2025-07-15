@@ -1,66 +1,163 @@
 <div class="grid-container"
-  [style.width]="width"
-  [style.height]="height">
-        <!-- ✅ Virtual Scroll 영역 -->
-    
-    <!-- ✅ 헤더 테이블 -->
-    <div class="grid-header">
+     [style.width]="width"
+     [style.height]="height">
+  
+  <!-- Excel-style Header -->
+  <div class="grid-header">
+    <div #headerWrapper class="grid-header-wrapper">
+      <div class="grid-table-wrapper">
         <table class="grid-table">
-            <thead>
-                <tr>
-                <th *ngIf="selectable" style="width: 40px; position: sticky; top: 0; z-index: 2;">
-                    <input type="checkbox" disabled />
+          <thead>
+            <tr>
+              <th *ngIf="selectable" 
+                  class="checkbox-header">
+                <input type="checkbox" 
+                       [checked]="isAllPageSelected()"
+                       [indeterminate]="!isAllPageSelected() && selectedSet.size > 0"
+                       (change)="onToggleSelectAll($event)"
+                       title="전체 선택/해제">
+              </th>
+              <ng-container *ngFor="let col of columns; trackBy: trackByColumn">
+                <th *ngIf="col.visible !== false"
+                    [style.width]="col.width || 'auto'"
+                    [style.text-align]="'center'"
+                    [title]="col.header">
+                  {{ col.header }}
                 </th>
-                <ng-container *ngFor="let col of columns">
-                    <th *ngIf="col.visible !== false"
-                        [style.width]="col.width || '150px'"
-                        
-                        style="position: sticky; top: 0; background: white; z-index: 2;">
-                        {{ col.header }}
-                    </th>
-                </ng-container>
-                </tr>
-            </thead>
+              </ng-container>
+            </tr>
+          </thead>
         </table>
+      </div>
+    </div>
+  </div>
+
+ 
+  <!-- Data Body with Virtual Scroll -->
+  <div #viewport class="grid-viewport" 
+       [style.height]="calcViewportHeight()">
+    
+    <!-- Virtual Scroll Mode -->
+    <cdk-virtual-scroll-viewport *ngIf="virtualScroll"
+                                 itemSize="40"
+                                 class="grid-virtual-scroll-viewport"> 
+      <div class="grid-table-wrapper">
+        <table class="grid-table">
+          <tbody>
+            <tr *cdkVirtualFor="let row of pagedData; trackBy: trackByRow"
+                [class.selected]="isRowSelected(row)"
+                (click)="onRowClick(row)"
+                (dblclick)="onRowDoubleClick(row)">
+              
+              <td *ngIf="selectable" 
+                  class="checkbox-cell" 
+                  (click)="$event.stopPropagation()">
+                <input type="checkbox"
+                       [checked]="isRowSelected(row)"
+                       (change)="onToggleRowSelection($event, row)">
+              </td>
+              
+              <ng-container *ngFor="let col of columns; trackBy: trackByColumn">
+                <td *ngIf="col.visible !== false"
+                    [ngClass]="getCellClass(col, row)"
+                    [ngStyle]="col.cellStyle" 
+                    [style.width]="col.width || 'auto'"
+                    [title]="getCellValue(row, col.field)">
+
+                  <ng-container *ngIf="col.templateRef; else defaultCell"
+                                [ngTemplateOutlet]="col.templateRef"
+                                [ngTemplateOutletContext]="{ $implicit: getCellValue(row, col.field), row: row, column: col }">
+                  </ng-container>
+
+                  <ng-template #defaultCell>
+                    {{ getCellValue(row, col.field) }}
+                  </ng-template>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </cdk-virtual-scroll-viewport>
+
+    <!-- Regular Scroll Mode -->
+    <div *ngIf="!virtualScroll" class="grid-regular-scroll">
+      <div class="grid-table-wrapper">
+        <table class="grid-table">
+          <tbody>
+            <tr *ngFor="let row of pagedData; trackBy: trackByRow"
+                [class.selected]="isRowSelected(row)"
+                (click)="onRowClick(row)"
+                (dblclick)="onRowDoubleClick(row)">
+              
+              <td *ngIf="selectable" 
+                  class="checkbox-cell" 
+                  (click)="$event.stopPropagation()">
+                <input type="checkbox"
+                       [checked]="isRowSelected(row)"
+                       (change)="onToggleRowSelection($event, row)">
+              </td>
+              
+              <ng-container *ngFor="let col of columns; trackBy: trackByColumn">
+                <td *ngIf="col.visible !== false"
+                    [ngClass]="getCellClass(col, row)"
+                    [ngStyle]="col.cellStyle" 
+                    [style.width]="col.width || 'auto'"
+                    [title]="getCellValue(row, col.field)">
+
+                  <ng-container *ngIf="col.templateRef; else defaultCell"
+                                [ngTemplateOutlet]="col.templateRef"
+                                [ngTemplateOutletContext]="{ $implicit: getCellValue(row, col.field), row: row, column: col }">
+                  </ng-container>
+
+                  <ng-template #defaultCell>
+                    {{ getCellValue(row, col.field) }}
+                  </ng-template>
+                </td>
+              </ng-container>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
-    <cdk-virtual-scroll-viewport *ngIf="virtualScroll"
-                                itemSize="40"
-                                class="grid-viewport"
-                                [style.height]="calcViewportHeight()"> 
-        <table class="grid-table">
-            <tbody>
-            <tr *cdkVirtualFor="let row of pagedData" (click)="onRowClick(row)">
-            <td *ngIf="selectable" style="width: 40px;" (click)="$event.stopPropagation()">
-                <input type="checkbox"
-                    [checked]="isRowSelected(row)"
-                    (change)="onToggleRowSelection($event, row)" 
-                    />
-            </td>
-            <ng-container *ngFor="let col of columns">
-                <td *ngIf="col.visible !== false"
-                    [ngClass]="col.cellClass"
-                    [ngStyle]="col.cellStyle" 
-                    [style.width]="col.width || '150px'">
+    <!-- Empty State -->
+    <div *ngIf="data.length === 0" class="grid-empty">
+      <div class="empty-icon">📋</div>
+      <div class="empty-title">데이터가 없습니다</div>
+      <div class="empty-description">표시할 항목이 없습니다.</div>
+    </div>
 
-                    <ng-container *ngIf="col.templateRef; else defaultCell"
-                                [ngTemplateOutlet]="col.templateRef"
-                                [ngTemplateOutletContext]="{ $implicit: row[col.field], row: row }">
-                    </ng-container>
-
-                    <ng-template #defaultCell>
-                    {{ row[col.field] }}
-                    </ng-template>
-                </td>
-            </ng-container>
-            </tr>
-            </tbody>
-        </table>
-    </cdk-virtual-scroll-viewport>
+    <!-- Loading State -->
+    <div *ngIf="loading" class="grid-loading">
+      <div class="loading-spinner"></div>
+    </div>
+  
+  </div>
+</div>  
+<!-- Excel-style Pagination -->
+<div class="pagination" *ngIf="enablePagination && pagedData.length > 0">
+    <button (click)="setPage(1)" 
+            [disabled]="currentPage === 1"
+            title="첫 페이지">
+    ⏮
+    </button>
+    <button (click)="setPage(currentPage - 1)" 
+            [disabled]="currentPage === 1"
+            title="이전 페이지">
+    ◀
+    </button>
+    <span>{{ currentPage }} / {{ totalPages }} 페이지</span>
+    <button (click)="setPage(currentPage + 1)" 
+            [disabled]="currentPage === totalPages"
+            title="다음 페이지">
+    ▶
+    </button>
+    <button (click)="setPage(totalPages)" 
+            [disabled]="currentPage === totalPages"
+            title="마지막 페이지">
+    ⏭
+    </button>
+    <span class="total-records">전체 {{ data.length }}건</span>
 </div>
 
-<div class="pagination" *ngIf="enablePagination">
-  <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">◀</button>
-  <span>Page {{ currentPage }} of {{ totalPages }}</span>
-  <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === totalPages">▶</button>
-</div>
