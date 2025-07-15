@@ -88,7 +88,7 @@ export class SidenavComponent {
           label: 'WriteOff',
           icon: faFileInvoiceDollar,
           children: [
-            { label: 'Ayda', route: '/admin/users', icon: faUser },
+            { label: 'loading', route: '/loading-demo', icon: faUser },
             { label: 'WriteOff', route: '/admin/roles', icon: faLock }
           ]
         },

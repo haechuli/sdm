@@ -32,9 +32,9 @@ export const routes: Routes = [
   },
   
   {
-    path: 'approvals',
+    path: 'loading-demo',
     loadComponent: () =>
-      import('./features/approvals/approvals.component').then(m => m.ApprovalsComponent),
+      import('./features/loading-demo/loading-demo.component').then(m => m.LoadingDemoComponent),
     canActivate: [authGuard]
   },
   

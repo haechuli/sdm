@@ -1,0 +1,41 @@
+<div class="loading-overlay" 
+     [class.visible]="isVisible" 
+     [class.transparent]="transparent"
+     [class.no-overlay]="!overlay"
+     *ngIf="isVisible">
+  
+  <div class="loading-container" [class]="'size-' + size">
+    
+    <!-- Spinner Type -->
+    <div *ngIf="type === 'spinner'" class="loading-spinner">
+      <div class="spinner"></div>
+    </div>
+    
+    <!-- Dots Type -->
+    <div *ngIf="type === 'dots'" class="loading-dots">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    
+    <!-- Pulse Type -->
+    <div *ngIf="type === 'pulse'" class="loading-pulse">
+      <div class="pulse-circle"></div>
+    </div>
+    
+    <!-- Bars Type -->
+    <div *ngIf="type === 'bars'" class="loading-bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+    
+    <!-- Loading Message -->
+    <div class="loading-message" *ngIf="message">
+      {{ message }}
+    </div>
+  </div>
+  
+</div>

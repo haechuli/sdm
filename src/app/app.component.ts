@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './core/layout/body/body.component';
 import { LayoutComponent } from './core/layout/layout/layout.component';
 import { AuthService } from './core/auth/auth.service';
+import { GlobalLoadingComponent } from './shared/ui-component/loading/global-loading.component';
 
 interface SideNavToggle {
   screenWidth: number;
@@ -18,7 +19,7 @@ interface SideNavToggle {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, LayoutComponent],
+  imports: [CommonModule, RouterOutlet, LayoutComponent, GlobalLoadingComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
