@@ -14,17 +14,50 @@
     <app-number-input class="item" formControlName="numberInput"  align="left" label="금액왼쪽입력"></app-number-input>
     <app-number-input class="item" formControlName="numberInput2"  align="left" label="금액"></app-number-input>
 
+
+
     <app-button  class="item" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
     <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
     <app-datepicker label="날짜 선택"  locale="id" [(value)]="selectedDate"/>
 
-    <app-customer-search 
-        class="item" 
-        label="customer_search"
-        formControlName="customer"
-        (customerSelected)="onCustomerSelected($event)"
-        (searchRequested)="onCustomerSearchRequested($event)">
-    </app-customer-search>
+
 
 </div>
+<app-customer-search
+    class="item"
+    label="customer_search"
+    [width]="'100px'"
+    formControlName="customer"
+    (customerSelected)="onCustomerSelected($event)"
+    (searchRequested)="onCustomerSearchRequested($event)">
+</app-customer-search>
+
+<!-- 마스크 입력 컴포넌트 예시들 -->
+<app-mask-input
+    class="item"
+    label="전화번호"
+    mask="000-0000-0000"
+    placeholder="010-1234-5678"
+    width="200px"
+    formControlName="phone">
+</app-mask-input>
+
+<app-mask-input
+    class="item"
+    label="사업자번호"
+    mask="000-00-00000"
+    placeholder="123-45-67890"
+    width="180px"
+    formControlName="businessNumber">
+</app-mask-input>
+
+<app-mask-input
+    class="item"
+    label="우편번호"
+    mask="00000"
+    placeholder="12345"
+    width="120px"
+    formControlName="zipCode">
+</app-mask-input>
+
 </form>

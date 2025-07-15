@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
     <input
       type="text"
       class="input"
+      [style.width]="width"
       [placeholder]="placeholder"
       [disabled]="isDisabled"
       [(ngModel)]="value"
@@ -32,6 +33,7 @@ import { CommonModule } from '@angular/common';
 export class InputComponent implements ControlValueAccessor {
   @Input() label = '';
   @Input() placeholder = '';
+  @Input() width: string = '100px';     // ✅ 기본값 지정 가능
 
   value: string = '';
   isDisabled = false;

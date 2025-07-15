@@ -1,0 +1,13 @@
+<div class="mask-input-container" [style.width]="width">
+  <label *ngIf="label" class="mask-input-label">{{ label }}</label>
+  <input
+    type="text"
+    class="mask-input"
+    [placeholder]="placeholder"
+    [value]="displayValue"
+    [disabled]="disabled"
+    (input)="onInput($event)"
+    (blur)="onBlur()"
+    autocomplete="off"
+  />
+</div>

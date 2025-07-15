@@ -6,8 +6,12 @@
 
   <!-- 고객번호 입력 필드 -->
   <div class="customer-input-group">
-    <app-input #customerIdInput label="" placeholder="'enter_customer_id' | translate"  [(ngModel)]="customerId"/>
-    
+    <app-input [width]="width"
+       #customerIdInput
+       label=""
+       placeholder=""
+       [(ngModel)]="customerId"/>
+
     <!-- 검색 버튼 -->
     <app-button
       [icon]="'fas fa-search'"
@@ -17,9 +21,7 @@
       (clicked)="openSearchPopup()"
       class="search-button">
     </app-button>
-  </div>
-
-  <!-- 고객명 표시 필드 -->
+    <!-- 고객명 표시 필드 -->
   <input
     #customerInput
     type="text"
@@ -29,6 +31,9 @@
     [(ngModel)]="customerName"
     readonly
   />
+  </div>
+
+
 
   <!-- 선택 해제 버튼 (고객이 선택된 경우에만 표시) -->
   <button
@@ -46,7 +51,7 @@
     *ngIf="isPopupOpen"
     class="customer-popup"
     [class.show-above]="false">
-    
+
     <div class="popup-header">
       <h3>{{ 'customer_search' | translate }}</h3>
       <button
@@ -89,7 +94,7 @@
             *ngFor="let customer of filteredCustomers; trackBy: trackByCustomerId"
             class="customer-item"
             (click)="selectCustomer(customer)">
-            
+
             <div class="customer-info">
               <div class="customer-id">{{ customer.id }}</div>
               <div class="customer-name">{{ customer.name }}</div>

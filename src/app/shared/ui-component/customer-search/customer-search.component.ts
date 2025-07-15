@@ -33,6 +33,7 @@ export class CustomerSearchComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean = false;
   @Input() customerId: string = '';
   @Input() customers: Customer[] = [];
+  @Input() width: string = '100px';     // ✅ 기본값 지정 가능
 
   @Output() customerSelected = new EventEmitter<Customer>();
   @Output() searchRequested = new EventEmitter<string>();
@@ -72,7 +73,7 @@ export class CustomerSearchComponent implements ControlValueAccessor, OnInit {
 
   openSearchPopup() {
     if (this.disabled) return;
-    
+
     this.isPopupOpen = true;
     this.filteredCustomers = [...this.customers];
     this.searchTerm = '';
@@ -101,7 +102,7 @@ export class CustomerSearchComponent implements ControlValueAccessor, OnInit {
     this.customerName = customer.name;
     this.customerId = customer.id;
     this.value = customer;
-    
+
     this.onChange(customer);
     this.customerSelected.emit(customer);
     this.closePopup();
@@ -124,7 +125,7 @@ export class CustomerSearchComponent implements ControlValueAccessor, OnInit {
     if (this.isPopupOpen && this.popup) {
       const clickedInside = this.popup.nativeElement.contains(event.target as Node);
       const clickedInput = this.customerInput?.nativeElement.contains(event.target as Node);
-      
+
       if (!clickedInside && !clickedInput) {
         this.closePopup();
       }

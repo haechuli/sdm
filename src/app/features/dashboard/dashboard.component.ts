@@ -7,11 +7,19 @@ import { ButtonComponent } from '../../shared/ui-component/button/button.compone
 import { DatepickerComponent } from '../../shared/ui-component/datepicker/datepicker.component';
 import { CustomerSearchComponent, Customer } from '../../shared/ui-component/customer-search/customer-search.component';
 import { CustomDateFormatPipe } from '../../shared/pipes/custom-date-format.pipe';
+import { MaskInputComponent } from '../../shared/ui-component/mask-input/mask-input.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [ReactiveFormsModule, InputComponent,ComboBoxComponent,NumberInputComponent,ButtonComponent, DatepickerComponent, CustomerSearchComponent],
+  imports: [ReactiveFormsModule,
+            InputComponent,
+            ComboBoxComponent,
+            NumberInputComponent,
+            ButtonComponent,
+            DatepickerComponent,
+            CustomerSearchComponent,
+            MaskInputComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
