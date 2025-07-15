@@ -1,0 +1,94 @@
+.page-title-container {
+  margin-bottom: 2rem;
+
+  &.small {
+    .page-title {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+    .page-subtitle {
+      font-size: 0.875rem;
+    }
+    .page-title-icon {
+      font-size: 1.25rem;
+    }
+  }
+
+  &.medium {
+    .page-title {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+    .page-subtitle {
+      font-size: 1rem;
+    }
+    .page-title-icon {
+      font-size: 1.5rem;
+    }
+  }
+
+  &.large {
+    .page-title {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+    .page-subtitle {
+      font-size: 1.125rem;
+    }
+    .page-title-icon {
+      font-size: 2rem;
+    }
+  }
+}
+
+.page-title-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.page-title-icon {
+  color: #3b82f6;
+  flex-shrink: 0;
+}
+
+.page-title-content {
+  flex: 1;
+}
+
+.page-title {
+  margin: 0;
+  font-weight: 700;
+  color: #1f2937;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.page-subtitle {
+  margin: 0.25rem 0 0 0;
+  color: #6b7280;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.page-title-divider {
+  margin: 1rem 0 0 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  background: none;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .page-title {
+    color: #f9fafb;
+  }
+
+  .page-subtitle {
+    color: #d1d5db;
+  }
+
+  .page-title-divider {
+    border-top-color: #374151;
+  }
+}
+

@@ -8,6 +8,7 @@ import { DatepickerComponent } from '../../shared/ui-component/datepicker/datepi
 import { CustomerSearchComponent, Customer } from '../../shared/ui-component/customer-search/customer-search.component';
 import { CustomDateFormatPipe } from '../../shared/pipes/custom-date-format.pipe';
 import { MaskInputComponent } from '../../shared/ui-component/mask-input/mask-input.component';
+import { PageTitleComponent } from '../../shared/ui-component/page-title/page-title.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,8 @@ import { MaskInputComponent } from '../../shared/ui-component/mask-input/mask-in
             ButtonComponent,
             DatepickerComponent,
             CustomerSearchComponent,
-            MaskInputComponent],
+            MaskInputComponent,
+            PageTitleComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -37,7 +39,10 @@ export class DashboardComponent implements OnInit {
     numberInput2:[''],
     button1:[''],
     button2:[''],
-    customer:['']
+    customer:[''],
+    phone:[''],
+    businessNumber:[''],
+    zipCode:[''],
   });
 
   countries = [

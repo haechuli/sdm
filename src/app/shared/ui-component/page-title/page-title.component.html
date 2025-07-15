@@ -1,0 +1,10 @@
+<div class="page-title-container" [ngClass]="customClass ? [size, customClass] : [size]">
+  <div class="page-title-header">
+    <div *ngIf="icon" [class]="icon" class="page-title-icon"></div>
+    <div class="page-title-content">
+      <h1 class="page-title">{{ title }}</h1>
+      <p *ngIf="subtitle" class="page-subtitle">{{ subtitle }}</p>
+    </div>
+  </div>
+  <hr *ngIf="showDivider" class="page-title-divider">
+</div>
