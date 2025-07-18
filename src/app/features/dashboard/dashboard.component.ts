@@ -11,6 +11,8 @@ import { GridColumn, GridRow } from '../../shared/ui-component/grid/grid.model';
 import { CustomDateFormatPipe } from '../../shared/pipes/custom-date-format.pipe';
 import { MaskInputComponent } from '../../shared/ui-component/mask-input/mask-input.component';
 import { PageTitleComponent } from '../../shared/ui-component/page-title/page-title.component';
+import { FileUploadComponent } from '../../shared/ui-component/file-upload/file-upload.component';
+import { FileUploadItem } from '../../shared/ui-component/file-upload/file-upload.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +26,8 @@ import { PageTitleComponent } from '../../shared/ui-component/page-title/page-ti
             CustomerSearchComponent,
             GridComponent,
             MaskInputComponent,
-            PageTitleComponent],
+            PageTitleComponent,
+            FileUploadComponent   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -44,8 +47,8 @@ export class DashboardComponent implements OnInit {
     button2:[''],
     customer:[''],
     phone:[''],
-    businessNumber:[''],
-    zipCode:[''],
+    documents:[''],
+    profileImage:[''],
   });
 
   countries = [
@@ -75,10 +78,10 @@ export class DashboardComponent implements OnInit {
   ];
 
   gridData: GridRow[] = [
-    { 
-      id: 1, 
-      name: '김철수', 
-      phone: '010-1234-5678', 
+    {
+      id: 1,
+      name: '김철수',
+      phone: '010-1234-5678',
       email: 'kim@example.com',
       address: '서울시 강남구 테헤란로 123',
       company: '(주)테크놀로지',
@@ -91,10 +94,10 @@ export class DashboardComponent implements OnInit {
       score: 95,
       notes: '우수 고객'
     },
-    { 
-      id: 2, 
-      name: '이영희', 
-      phone: '010-2345-6789', 
+    {
+      id: 2,
+      name: '이영희',
+      phone: '010-2345-6789',
       email: 'lee@example.com',
       address: '서울시 서초구 서초대로 456',
       company: '삼성전자',
@@ -107,10 +110,10 @@ export class DashboardComponent implements OnInit {
       score: 87,
       notes: '장기 고객'
     },
-    { 
-      id: 3, 
-      name: '박민수', 
-      phone: '010-3456-7890', 
+    {
+      id: 3,
+      name: '박민수',
+      phone: '010-3456-7890',
       email: 'park@example.com',
       address: '서울시 송파구 올림픽로 789',
       company: 'LG전자',
@@ -123,10 +126,10 @@ export class DashboardComponent implements OnInit {
       score: 72,
       notes: '신규 고객'
     },
-    { 
-      id: 4, 
-      name: '정수진', 
-      phone: '010-4567-8901', 
+    {
+      id: 4,
+      name: '정수진',
+      phone: '010-4567-8901',
       email: 'jung@example.com',
       address: '서울시 마포구 월드컵북로 321',
       company: '네이버',
@@ -139,10 +142,10 @@ export class DashboardComponent implements OnInit {
       score: 98,
       notes: 'VIP 고객'
     },
-    { 
-      id: 5, 
-      name: '최동훈', 
-      phone: '010-5678-9012', 
+    {
+      id: 5,
+      name: '최동훈',
+      phone: '010-5678-9012',
       email: 'choi@example.com',
       address: '서울시 용산구 한강대로 654',
       company: '카카오',
@@ -195,5 +198,50 @@ export class DashboardComponent implements OnInit {
 
   onGridSelectionChange(selectedRows: GridRow[]) {
     console.log('선택된 행들:', selectedRows);
+  }
+
+  // 파일 업로드 이벤트 핸들러
+  onFilesSelected(files: FileUploadItem[]) {
+    console.log('선택된 파일들:', files);
+    // 파일 선택 시 필요한 로직 추가
+    if (files.length > 0) {
+      console.log(`${files.length}개의 파일이 선택되었습니다.`);
+      files.forEach(file => {
+        console.log(`- ${file.name} (${this.formatFileSize(file.size)})`);
+      });
+    }
+  }
+
+  onUploadComplete(fileItem: FileUploadItem) {
+    console.log('업로드 완료:', fileItem);
+    // 업로드 완료 시 필요한 로직 추가
+    alert(`파일 업로드가 완료되었습니다: ${fileItem.name}`);
+  }
+
+  onImageSelected(files: FileUploadItem[]) {
+    console.log('선택된 이미지:', files);
+    // 이미지 선택 시 필요한 로직 추가
+    if (files.length > 0) {
+      const imageFile = files[0];
+      console.log(`이미지 파일: ${imageFile.name} (${this.formatFileSize(imageFile.size)})`);
+
+      // 이미지 미리보기 등의 로직을 여기에 추가할 수 있습니다
+      if (imageFile.file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          console.log('이미지 미리보기 URL:', e.target?.result);
+        };
+        reader.readAsDataURL(imageFile.file);
+      }
+    }
+  }
+
+  // 파일 크기 포맷팅 유틸리티 메서드
+  private formatFileSize(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   }
 }

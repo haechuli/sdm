@@ -1,0 +1,122 @@
+<div class="file-upload-container" [style.width]="width">
+  <label *ngIf="label" class="file-upload-label">{{ label }}</label>
+
+  <!-- 파일 입력 영역 -->
+  <div
+    class="file-drop-zone"
+    [class.drag-over]="isDragOver"
+    [class.disabled]="disabled"
+    [style.height]="height"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+    (click)="openFileDialog()">
+
+    <div class="drop-zone-content">
+      <i class="fas fa-cloud-upload-alt upload-icon"></i>
+      <p class="upload-text">
+        파일을 여기로 드래그하거나 <span class="click-text">클릭</span>하여 선택하세요
+      </p>
+      <p class="upload-info">
+        <span *ngIf="acceptedTypes !== '*/*'">허용 형식: {{ acceptedTypes }}</span>
+        <span *ngIf="acceptedTypes !== '*/*'"> | </span>
+        최대 {{ formatFileSize(maxFileSize) }}
+        <span *ngIf="multiple"> | 최대 {{ maxFiles }}개</span>
+      </p>
+    </div>
+
+    <input
+      #fileInput
+      type="file"
+      [accept]="acceptedTypes"
+      [multiple]="multiple"
+      [disabled]="disabled"
+      (change)="onFileSelect($event)"
+      style="display: none;">
+  </div>
+
+  <!-- 파일 목록 -->
+  <div *ngIf="files.length > 0" class="file-list">
+    <div class="file-list-header">
+      <span>선택된 파일 ({{ files.length }})</span>
+      <div class="file-actions">
+        <button
+          *ngIf="uploadUrl && !autoUpload"
+          type="button"
+          class="btn btn-primary btn-sm"
+          (click)="uploadAll()"
+          [disabled]="allFilesUploaded">
+          <i class="fas fa-upload"></i> 모두 업로드
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          (click)="clearAll()">
+          <i class="fas fa-trash"></i> 모두 삭제
+        </button>
+      </div>
+    </div>
+
+    <div class="file-items">
+      <div
+        *ngFor="let file of files; trackBy: trackByFileId"
+        class="file-item"
+        [class.uploading]="file.status === 'uploading'"
+        [class.success]="file.status === 'success'"
+        [class.error]="file.status === 'error'">
+
+        <div class="file-info">
+          <div class="file-icon">
+            <i [class]="getFileIcon(file)"></i>
+          </div>
+
+          <div class="file-details">
+            <div class="file-name">{{ file.name }}</div>
+            <div class="file-size">{{ formatFileSize(file.size) }}</div>
+            <div *ngIf="file.status === 'error'" class="file-error">
+              {{ file.error }}
+            </div>
+          </div>
+        </div>
+
+        <!-- 미리보기 (이미지인 경우) -->
+        <div *ngIf="showPreview && isImage(file)" class="file-preview">
+          <img [src]="getImagePreview(file)" alt="미리보기">
+        </div>
+
+        <!-- 진행률 표시 -->
+        <div *ngIf="file.status === 'uploading'" class="file-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="file.progress"></div>
+          </div>
+          <span class="progress-text">{{ file.progress.toFixed(0) }}%</span>
+        </div>
+
+        <!-- 상태 아이콘 -->
+        <div class="file-status">
+          <i *ngIf="file.status === 'pending'" class="fas fa-clock status-pending"></i>
+          <i *ngIf="file.status === 'uploading'" class="fas fa-spinner fa-spin status-uploading"></i>
+          <i *ngIf="file.status === 'success'" class="fas fa-check-circle status-success"></i>
+          <i *ngIf="file.status === 'error'" class="fas fa-exclamation-circle status-error"></i>
+        </div>
+
+        <!-- 액션 버튼 -->
+        <div class="file-actions">
+          <button
+            *ngIf="uploadUrl && !autoUpload && file.status === 'pending'"
+            type="button"
+            class="btn btn-sm btn-primary"
+            (click)="uploadFile(file)">
+            <i class="fas fa-upload"></i>
+          </button>
+          <button
+            type="button"
+            class="btn btn-sm btn-danger"
+            (click)="removeFile(file)">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
