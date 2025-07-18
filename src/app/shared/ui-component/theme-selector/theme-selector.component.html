@@ -1,0 +1,21 @@
+<div class="theme-selector">
+  <button
+    class="theme-toggle-btn"
+    (click)="toggleTheme()"
+    [attr.aria-label]="currentTheme === 'light' ? '다크 테마로 변경' : '라이트 테마로 변경'"
+    [title]="currentTheme === 'light' ? '다크 테마로 변경' : '라이트 테마로 변경'">
+    <i class="theme-icon" [class]="currentTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun'"></i>
+  </button>
+
+  <!-- 드롭다운 메뉴 (선택사항) -->
+  <div class="theme-dropdown" *ngIf="false">
+    <button class="theme-option" (click)="setTheme('light')" [class.active]="currentTheme === 'light'">
+      <i class="fas fa-sun"></i>
+      <span>라이트</span>
+    </button>
+    <button class="theme-option" (click)="setTheme('dark')" [class.active]="currentTheme === 'dark'">
+      <i class="fas fa-moon"></i>
+      <span>다크</span>
+    </button>
+  </div>
+</div>

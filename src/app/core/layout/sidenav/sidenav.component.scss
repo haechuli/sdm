@@ -4,12 +4,13 @@
   position: fixed;
   z-index: 1;
   top: 0;
-  background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-secondary);
+  border-right: 1px solid var(--border-primary);
   padding: 0;
   overflow-y: auto;
-  color: #fff;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-lg);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 ul {
@@ -27,27 +28,45 @@ ul:first-of-type {
   cursor: pointer;
   font-weight: 500;
   border-radius: 6px;
-  transition: 
-    all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-    background-color 0.2s ease-in-out;
-  color: #fff;
+  transition: all 0.3s ease;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   text-align: left;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--bg-tertiary);
     transform: translateX(3px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    
+    box-shadow: var(--shadow-md);
+
     .menu-icon {
-      color: #fff;
+      color: var(--text-primary);
       transform: scale(1.1);
     }
-    
+
     .expand-arrow {
-      color: rgba(255, 255, 255, 1);
+      color: var(--text-primary);
     }
+  }
+
+  &.active {
+    background: var(--primary-500);
+    color: white;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  }
+
+  // 메뉴 아이콘 스타일
+  .menu-icon {
+    font-size: 18px;
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
   }
 
   // 메뉴 텍스트 영역
@@ -61,6 +80,8 @@ ul:first-of-type {
   // 확장 화살표를 오른쪽 끝에 위치
   .expand-arrow {
     margin-left: auto;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
   }
 }
 
@@ -69,7 +90,7 @@ ul:first-of-type {
   overflow: hidden;
   opacity: 0;
   transform: translateY(-10px);
-  transition: 
+  transition:
     max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     opacity 0.3s ease-in-out 0.1s,
     transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
@@ -95,7 +116,7 @@ ul:first-of-type {
   li {
     opacity: 0;
     transform: translateX(-15px);
-    transition: 
+    transition:
       opacity 0.3s ease-in-out,
       transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
@@ -103,7 +124,7 @@ ul:first-of-type {
   &.open li {
     opacity: 1;
     transform: translateX(0);
-    
+
     // 순차적으로 나타나는 효과
     @for $i from 1 through 10 {
       &:nth-child(#{$i}) {
@@ -120,17 +141,17 @@ a {
   border-radius: 6px;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.8);
-  transition: 
+  transition:
     all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     background-color 0.2s ease-in-out;
   text-align: left;
-  
+
   &:hover {
     background: rgba(255, 255, 255, 0.15);
     color: #fff;
     transform: translateX(3px);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    
+
     .menu-icon {
       color: #fff;
       transform: scale(1.1);
@@ -159,7 +180,7 @@ a.active {
   width: 16px;
   height: 16px;
   color: rgba(255, 255, 255, 0.9);
-  transition: 
+  transition:
     color 0.3s ease,
     transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -167,14 +188,14 @@ a.active {
 // 확장/축소 화살표 스타일
 .expand-arrow {
   font-size: 12px;
-  transition: 
+  transition:
     transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     color 0.3s ease;
   color: rgba(255, 255, 255, 0.7);
   margin-left: 8px;
   min-width: 12px;
   text-align: center;
-  
+
   &.expanded {
     transform: rotate(180deg);
     color: rgba(255, 255, 255, 0.9);

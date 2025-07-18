@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { ButtonComponent } from '../../../shared/ui-component/button/button.component';
 import { LanguageSelectorComponent } from '../../../shared/ui-component/language-selector/language-selector.component';
+import { ThemeSelectorComponent } from '../../../shared/ui-component/theme-selector/theme-selector.component';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { AuthService, User } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, LanguageSelectorComponent, TranslatePipe],
+  imports: [CommonModule, ButtonComponent, LanguageSelectorComponent, ThemeSelectorComponent, TranslatePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

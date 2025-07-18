@@ -1,0 +1,159 @@
+.mergerequest-container {
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+
+  h1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-500);
+    transition: color 0.3s ease;
+  }
+
+  .merge-request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .merge-request-item {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .mr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+
+      .mr-title {
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .mr-id {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+    }
+
+    .mr-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+
+      .mr-author,
+      .mr-branch,
+      .mr-date {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .mr-description {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .mr-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+
+      .mr-status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    background-color: var(--bg-tertiary);
+    transition: all 0.3s ease;
+
+    &.open {
+      background-color: var(--success-100);
+      color: var(--success-800);
+      border-color: var(--success-300);
+    }
+
+    &.merged {
+      background-color: var(--primary-100);
+      color: var(--primary-800);
+      border-color: var(--primary-300);
+    }
+
+    &.closed {
+      background-color: var(--error-100);
+      color: var(--error-800);
+      border-color: var(--error-300);
+    }
+
+    &.draft {
+      background-color: var(--warning-100);
+      color: var(--warning-800);
+      border-color: var(--warning-300);
+    }
+  }
+
+  .filter-bar {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+
+    .filter-group {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+
+      label {
+        color: var(--text-secondary);
+        font-size: small;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+    }
+  }
+}

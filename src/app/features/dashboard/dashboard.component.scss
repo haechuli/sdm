@@ -1,32 +1,37 @@
 .container {
   display: grid;
   grid-template-columns: 300px 200px 400px 300px;
-  padding: 10px;
-  row-gap: 10px;
+  padding: 1.5rem;
+  row-gap: 1.5rem;
+  column-gap: 1.5rem;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
 }
 
 .item {
-  flex: 1; /* 각 항목이 동일한 비율로 공간을 나눔 */
+  flex: 1;
 }
 
 // 그리드 섹션 스타일
 .grid-section {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-primary);
+  transition: all 0.3s ease;
 
   h3 {
-    margin: 0 0 20px 0;
-    color: #495057;
-    font-size: 18px;
+    margin: 0 0 1.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.125rem;
     font-weight: 600;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #007bff;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--primary-500);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 0.75rem;
+    transition: color 0.3s ease;
 
     &::before {
       content: '📊';

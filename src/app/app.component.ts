@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BodyComponent } from './core/layout/body/body.component';
 import { LayoutComponent } from './core/layout/layout/layout.component';
 import { AuthService } from './core/auth/auth.service';
+import { ThemeService } from './core/services/theme.service';
 import { GlobalLoadingComponent } from './shared/ui-component/loading/global-loading.component';
 
 interface SideNavToggle {
@@ -33,10 +34,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit(): void {
+    // 테마 서비스 초기화
+    this.themeService.getCurrentTheme();
+
     // 현재 라우트 확인
     this.subscription.add(
       this.router.events.pipe(

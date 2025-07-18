@@ -2,13 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #1f2937;
-  color: white;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
   margin-left: 240px;
+  border-bottom: 1px solid var(--border-primary);
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .right {
@@ -19,4 +22,6 @@
 
 .user-info {
   margin-right: 10px;
+  color: var(--text-secondary);
+  font-weight: 500;
 }

@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <label *ngIf="label" class="numberinput">{{ label }}</label>
     <input
-      #inputEl 
+      #inputEl
       type="text"
       Class="numberinput"
       [ngClass]="{
@@ -35,7 +35,7 @@ export class NumberInputComponent implements ControlValueAccessor {
   @Input() placeholder = '';
   @Input() align: 'left' | 'right' = 'right';
   @ViewChild('inputEl') inputEl!: ElementRef<HTMLInputElement>;
-  
+
 
   private internalValue: number | null = null;
   disabled = false;
@@ -66,15 +66,17 @@ export class NumberInputComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
+
+
   onInput(event: Event): void {
     const input = (event.target as HTMLInputElement).value;
 
     // 숫자만 남기기
     const numericValue = input.replace(/[^0-9]/g, '');
     console.log(numericValue);
-   
-    
-    
+
+
+
 
     // 숫자가 없는 경우
     this.internalValue = numericValue ? parseInt(numericValue, 10) : null;

@@ -24,6 +24,7 @@ export interface ComboOption {
 export class ComboBoxComponent implements ControlValueAccessor {
   @Input() options: ComboOption[] = [];
   @Input() placeholder: string = 'Select an option';
+  @Input() label: string = '';
   @Input() disabled: boolean = false;
   @Output() selectionChange = new EventEmitter<any>();
 

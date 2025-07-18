@@ -9,18 +9,20 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule, FormsModule],
   styleUrls: ['./input.component.scss'],
   template: `
-    <label *ngIf="label" class="input">
-      {{ label }}
-    </label>
-    <input
-      type="text"
-      class="input"
-      [style.width]="width"
-      [placeholder]="placeholder"
-      [disabled]="isDisabled"
-      [(ngModel)]="value"
-      (ngModelChange)="onChange($event)"
-    />
+    <div class="input-container">
+      <label *ngIf="label" class="input-label">
+        {{ label }}
+      </label>
+      <input
+        type="text"
+        class="input"
+        [style.width]="width"
+        [placeholder]="placeholder"
+        [disabled]="isDisabled"
+        [(ngModel)]="value"
+        (ngModelChange)="onChange($event)"
+      />
+    </div>
   `,
   providers: [
     {

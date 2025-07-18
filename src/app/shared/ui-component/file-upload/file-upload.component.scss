@@ -5,60 +5,64 @@
 }
 
 .file-upload-label {
-  font-size: 0.875rem;
+  font-size: small;
   font-weight: 500;
-  color: #374151;
+  color: var(--text-secondary);
   margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
 }
 
 .file-drop-zone {
-  border: 2px dashed #d1d5db;
+  border: 2px dashed var(--border-primary);
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 0.3rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  background-color: #f9fafb;
+  background-color: var(--bg-secondary);
 
   &:hover:not(.disabled) {
-    border-color: #3b82f6;
-    background-color: #eff6ff;
+    border-color: var(--primary-500);
+    background-color: var(--primary-50);
   }
 
   &.drag-over {
-    border-color: #3b82f6;
-    background-color: #dbeafe;
+    border-color: var(--primary-500);
+    background-color: var(--primary-100);
   }
 
   &.disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    background-color: #f3f4f6;
+    background-color: var(--bg-tertiary);
   }
 }
 
 .drop-zone-content {
   .upload-icon {
     font-size: 3rem;
-    color: #6b7280;
+    color: var(--text-tertiary);
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
   }
 
   .upload-text {
-    font-size: 1rem;
-    color: #374151;
+    font-size: small;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
 
     .click-text {
-      color: #3b82f6;
+      color: var(--primary-500);
       font-weight: 500;
     }
   }
 
   .upload-info {
-    font-size: 0.875rem;
-    color: #6b7280;
+    font-size: small;
+    color: var(--text-secondary);
     margin: 0;
+    transition: color 0.3s ease;
   }
 }
 
@@ -135,11 +139,11 @@
 
   .file-name {
     font-weight: 500;
-    color: #374151;
-    truncate: true;
+    color: var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: color 0.3s ease;
   }
 
   .file-size {

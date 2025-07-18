@@ -1,0 +1,75 @@
+.approvals-container {
+  padding: 2rem;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition: all 0.3s ease;
+
+  h1 {
+    color: var(--text-primary);
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-500);
+    transition: color 0.3s ease;
+  }
+
+  .content-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .approval-item {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-primary);
+    transition: all 0.3s ease;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: var(--bg-tertiary);
+    }
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    background-color: var(--bg-tertiary);
+    transition: all 0.3s ease;
+
+    &.pending {
+      background-color: var(--warning-100);
+      color: var(--warning-800);
+      border-color: var(--warning-300);
+    }
+
+    &.approved {
+      background-color: var(--success-100);
+      color: var(--success-800);
+      border-color: var(--success-300);
+    }
+
+    &.rejected {
+      background-color: var(--error-100);
+      color: var(--error-800);
+      border-color: var(--error-300);
+    }
+  }
+}
