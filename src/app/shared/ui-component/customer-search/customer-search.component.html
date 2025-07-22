@@ -6,7 +6,7 @@
 
   <!-- 고객번호 입력 필드 -->
   <div class="customer-input-group">
-    <app-input [width]="width"
+    <app-input [width]="id_width"
        #customerIdInput
        label=""
        placeholder=""
@@ -22,28 +22,14 @@
       class="search-button">
     </app-button>
     <!-- 고객명 표시 필드 -->
-  <input
-    #customerInput
-    type="text"
-    class="customer-name-input"
-    [placeholder]="'select_customer' | translate"
-    [disabled]="disabled"
-    [(ngModel)]="customerName"
-    readonly
-  />
+    <app-input [width]="name_width"
+      #customerInput
+      [placeholder]="'select_customer' | translate"
+      [disabled]="disabled"
+      [(ngModel)]="customerName"
+      readonly
+    />
   </div>
-
-
-
-  <!-- 선택 해제 버튼 (고객이 선택된 경우에만 표시) -->
-  <button
-    *ngIf="selectedCustomer && !disabled"
-    type="button"
-    class="clear-button"
-    (click)="clearSelection()"
-    [title]="'close' | translate">
-    <i class="fas fa-times"></i>
-  </button>
 
   <!-- 고객 검색 팝업 -->
   <div

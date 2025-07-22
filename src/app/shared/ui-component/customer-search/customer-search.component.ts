@@ -33,7 +33,8 @@ export class CustomerSearchComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean = false;
   @Input() customerId: string = '';
   @Input() customers: Customer[] = [];
-  @Input() width: string = '100px';     // ✅ 기본값 지정 가능
+  @Input() id_width: string = '100px';     // ✅ 기본값 지정 가능
+  @Input() name_width: string = '300px';     // ✅ 기본값 지정 가능
 
   @Output() customerSelected = new EventEmitter<Customer>();
   @Output() searchRequested = new EventEmitter<string>();

@@ -27,6 +27,7 @@
       color: var(--text-tertiary);
       cursor: not-allowed;
       transition: all 0.3s ease;
+      line-height: 1.25rem;
 
       &:focus {
         outline: none;
@@ -46,14 +47,14 @@
 
   .customer-name-input {
     width: 100%;
-    padding: 6px 10px;
-    border: 1px solid #ddd;
+    padding: 0.3rem;
+    border: 1px solid var(--border-primary);
     border-radius: 4px;
     font-size: small;
-    background-color: #f8f9fa;
+    background-color: var(--bg-secondary);
     color: #333;
     cursor: not-allowed;
-
+    line-height: 1.25rem; 
     &:focus {
       outline: none;
       border-color: #007bff;

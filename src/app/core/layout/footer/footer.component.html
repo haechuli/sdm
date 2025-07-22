@@ -5,7 +5,6 @@
       <div class="branch-selector">
         <label class="footer-label">{{ 'branch' | translate }}:</label>
         <app-combobox
-          class="footer-combobox"
           [options]="branches"
           [placeholder]="'select_branch' | translate"
           (selectionChange)="onBranchChanged($event)">
@@ -29,10 +28,10 @@
           <span class="time-label">{{ 'current_time' | translate }}:</span>
           <span class="time-value">{{ currentTime }}</span>
         </div>
-        <div class="system-status">
+        <!-- <div class="system-status">
           <span class="status-indicator online"></span>
           <span class="status-text">{{ 'system_online' | translate }}</span>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

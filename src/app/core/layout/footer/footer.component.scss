@@ -3,10 +3,10 @@
   bottom: 0;
   z-index: 1000;
   margin-left: 240px;
-  background: linear-gradient(180deg, #1f2937 0%, #111827 100%);
+  background: var(--bg-secondary);
+  
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-  color: white;
   min-height: 60px;
 }
 
@@ -42,7 +42,7 @@
 .footer-label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
   margin-right: 8px;
   white-space: nowrap;
 }
@@ -165,7 +165,7 @@
   font-size: 0.85rem;
 
   .time-label {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-primary);
     font-weight: 500;
   }
 

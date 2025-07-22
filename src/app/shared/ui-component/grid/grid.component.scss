@@ -1,9 +1,9 @@
 // Excel-like Grid Styles
 .grid-container {
   position: relative;
-  border: 2px solid #c5c5c5;
+  border: 2px solid var(--border-primary);
   border-radius: 4px;
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,12 +13,12 @@
   min-width: 600px;
   max-height: 500px;
 }
-
+l
 .grid-header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-primary) 100%);
   border-bottom: 2px solid #c5c5c5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -41,7 +41,7 @@
 .grid-viewport {
   overflow-x: auto;
   overflow-y: auto;
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   position: relative;
 
   // 스크롤바 스타일링 - 프리미엄 디자인
@@ -199,8 +199,8 @@
   th, td {
     position: relative;
     padding: 0.3rem;
-    border-right: 1px solid #d0d7de;
-    border-bottom: 1px solid #d0d7de;
+    border-right: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-primary);
     font-size: small;
     line-height: 1.4;
     text-align: left;
@@ -209,6 +209,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 80px; // 최소 셀 너비 설정
+    color: var(--text-primary);
 
     // 셀 선택 효과
     &:hover {
@@ -217,13 +218,13 @@
   }
 
   th {
-    background: linear-gradient(to bottom, #f8f9fa 0%, #e9ecef 100%);
+    background: linear-gradient(to bottom, var(--bg-primary) 0%, var(--bg-secondary) 100%);
     font-weight: 600;
     color: #495057;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 0.5px;
-    border-bottom: 2px solid #c5c5c5;
+    border-bottom: 2px solid var(--border-primary);
     user-select: none;
     cursor: default;
 
@@ -245,11 +246,11 @@
 
     // 줄무늬 효과
     &:nth-child(even) {
-      background-color: #f8f9fa;
+      background-color: var(--bg-secondary);
     }
 
     &:nth-child(odd) {
-      background-color: #ffffff;
+      background-color: var(--bg-primary);
     }
 
     // 행 호버 효과
@@ -290,10 +291,12 @@
       width: 10px;
       text-align: center;
       padding: 0.3rem;
-
+      border-bottom: 1px solid var(--border-primary);
+     
       input[type="checkbox"] {
         margin: 0;
         transform: scale(1.1);
+        background-color: var(--bg-secondary);
         cursor: pointer;
       }
     }
@@ -369,9 +372,9 @@
   input[type="checkbox"] {
     width: 16px;
     height: 16px;
-    border: 2px solid #c5c5c5;
+    border: 2px solid var(--border-primary);
     border-radius: 3px;
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     cursor: pointer;
     transition: all 0.15s ease;
 
@@ -410,14 +413,14 @@
   justify-content: center;
   gap: 8px;
   padding: 16px;
-  background-color: #f8f9fa;
+  background-color: var(--bg-primary);
   //border-top: 1px solid #d0d7de;
 
   button {
     padding: 0.3rem;
     border: 1px solid #d0d7de;
     border-radius: 4px;
-    background-color: #ffffff;
+    background-color: var(--bg-primary);
     color: #495057;
     font-size: 13px;
     font-weight: 500;
@@ -430,12 +433,12 @@
     }
 
     &:active:not(:disabled) {
-      background-color: #dee2e6;
+      background-color: var(--bg-primary);
       border-color: #6c757d;
     }
 
     &:disabled {
-      background-color: #f8f9fa;
+      background-color: var(--bg-primary);
       color: #adb5bd;
       cursor: not-allowed;
       border-color: #e9ecef;
