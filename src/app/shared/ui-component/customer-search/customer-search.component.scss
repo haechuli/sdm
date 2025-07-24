@@ -15,7 +15,7 @@
   .customer-input-group {
     display: flex;
     gap: 8px;
-    margin-bottom: 8px;
+    //margin-bottom: 8px;
 
     .customer-id-input {
       flex: 1;
@@ -27,7 +27,7 @@
       color: var(--text-tertiary);
       cursor: not-allowed;
       transition: all 0.3s ease;
-      line-height: 1.25rem;
+     // line-height: 1.25rem;
 
       &:focus {
         outline: none;
@@ -54,7 +54,7 @@
     background-color: var(--bg-secondary);
     color: #333;
     cursor: not-allowed;
-    line-height: 1.25rem; 
+    //line-height: 1.25rem; 
     &:focus {
       outline: none;
       border-color: #007bff;
