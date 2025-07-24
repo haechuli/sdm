@@ -1,0 +1,169 @@
+<div class="image-viewer-overlay" 
+     [class.visible]="isVisible" 
+     [class.fullscreen]="isFullscreen"
+     [style.backgroundColor]="config.backgroundColor"
+     *ngIf="isVisible"
+     (click)="closeViewer()">
+
+  <div class="image-viewer-container" 
+       #imageContainer
+       (click)="$event.stopPropagation()">
+
+    <!-- Header with controls -->
+    <div class="image-viewer-header" *ngIf="config.showControls">
+      <div class="header-left">
+        <div class="image-counter" *ngIf="hasMultipleImages">
+          {{ currentIndex + 1 }} / {{ images.length }}
+        </div>
+        <div class="image-title" *ngIf="currentImage && currentImage.title">
+          {{ currentImage.title }}
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <button class="control-btn" 
+                title="정보 표시/숨기기 (I)" 
+                (click)="toggleInfo()"
+                [class.active]="showInfo">
+          <i class="fas fa-info-circle"></i>
+        </button>
+        
+        <button class="control-btn" 
+                title="전체화면 (F)" 
+                (click)="toggleFullscreen()"
+                *ngIf="config.allowFullscreen">
+          <i class="fas" [class.fa-expand]="!isFullscreen" [class.fa-compress]="isFullscreen"></i>
+        </button>
+        
+        <button class="control-btn close-btn" 
+                title="닫기 (ESC)" 
+                (click)="closeViewer()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Main image area -->
+    <div class="image-viewer-main">
+      
+      <!-- Navigation buttons -->
+      <button class="nav-btn nav-prev" 
+              *ngIf="canGoPrevious && config.showControls"
+              title="이전 이미지 (←)"
+              (click)="previousImage()">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      
+      <button class="nav-btn nav-next" 
+              *ngIf="canGoNext && config.showControls"
+              title="다음 이미지 (→)"
+              (click)="nextImage()">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+
+      <!-- Image container -->
+      <div class="image-container"
+           (wheel)="onWheelZoom($event)"
+           (mousedown)="onMouseDown($event)"
+           (mousemove)="onMouseMove($event)"
+           (mouseup)="onMouseUp()"
+           (mouseleave)="onMouseUp()"
+           (touchstart)="onTouchStart($event)"
+           (touchmove)="onTouchMove($event)"
+           (touchend)="onTouchEnd()">
+        
+        <!-- Loading spinner -->
+        <div class="loading-spinner" *ngIf="isLoading">
+          <div class="spinner"></div>
+          <div class="loading-text">이미지 로딩 중...</div>
+        </div>
+
+        <!-- Main image -->
+        <img #currentImageRef
+             *ngIf="images[currentIndex]"
+             [src]="images[currentIndex].src"
+             [alt]="images[currentIndex].alt || 'Image'"
+             class="main-image"
+             [class.dragging]="isDragging"
+             (load)="onImageLoad()"
+             (error)="onImageError()"
+             draggable="false">
+      </div>
+    </div>
+
+    <!-- Zoom controls -->
+    <div class="zoom-controls" *ngIf="config.allowZoom && config.showControls">
+      <button class="control-btn" title="축소 (-)" (click)="zoomOut()">
+        <i class="fas fa-minus"></i>
+      </button>
+      
+      <div class="zoom-level">{{ (zoom * 100) | number:'1.0-0' }}%</div>
+      
+      <button class="control-btn" title="확대 (+)" (click)="zoomIn()">
+        <i class="fas fa-plus"></i>
+      </button>
+      
+      <button class="control-btn" title="원본 크기 (0)" (click)="resetTransform()">
+        <i class="fas fa-expand-arrows-alt"></i>
+      </button>
+      
+      <button class="control-btn" 
+              title="회전 (R)" 
+              (click)="rotateImage()"
+              *ngIf="config.allowRotation">
+        <i class="fas fa-redo"></i>
+      </button>
+      
+      <button class="control-btn" title="화면에 맞춤" (click)="fitToScreen()">
+        <i class="fas fa-compress-arrows-alt"></i>
+      </button>
+    </div>
+
+    <!-- Image information panel -->
+    <div class="image-info" *ngIf="showInfo && currentImage" [class.visible]="showInfo">
+      <h4>이미지 정보</h4>
+      <div class="info-item" *ngIf="currentImage && currentImage.title">
+        <strong>제목:</strong> {{ currentImage.title }}
+      </div>
+      <div class="info-item" *ngIf="currentImage && currentImage.description">
+        <strong>설명:</strong> {{ currentImage.description }}
+      </div>
+      <div class="info-item" *ngIf="currentImage">
+        <strong>파일:</strong> {{ currentImage.src | slice:-50 }}
+      </div>
+      <div class="info-item">
+        <strong>확대:</strong> {{ (zoom * 100) | number:'1.0-0' }}%
+      </div>
+      <div class="info-item" *ngIf="rotation !== 0">
+        <strong>회전:</strong> {{ rotation }}°
+      </div>
+    </div>
+
+    <!-- Thumbnails -->
+    <div class="thumbnails-container" 
+         *ngIf="config.showThumbnails && hasMultipleImages">
+      <div class="thumbnails">
+        <div class="thumbnail" 
+             *ngFor="let image of images; let i = index"
+             [class.active]="i === currentIndex"
+             (click)="onThumbnailClick(i)">
+          <img [src]="image.src" 
+               [alt]="image.alt || 'Thumbnail'"
+               loading="lazy">
+          <div class="thumbnail-overlay" *ngIf="i === currentIndex">
+            <i class="fas fa-check"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Keyboard shortcuts help -->
+  <div class="keyboard-help" *ngIf="config.enableKeyboard && config.showControls">
+    <div class="help-text">
+      키보드 단축키: ← → (이동), + - (확대/축소), R (회전), F (전체화면), I (정보), ESC (닫기)
+    </div>
+  </div>
+
+</div>

@@ -83,7 +83,8 @@
 </form>
 
 <!-- Excel 스타일 그리드 예시 -->
-<div class="grid-section">
+<!-- <div class="grid-section"> -->
+<div class="group">
     <h3>고객 목록 (Excel 스타일 그리드)</h3>
     <app-grid
         [columns]="gridColumns"
@@ -99,3 +100,67 @@
         (selectedRowsChange)="onGridSelectionChange($event)">
     </app-grid>
 </div>
+
+<!-- 이미지 뷰어 데모 섹션 -->
+<div class="group">
+    <h3>이미지 뷰어 데모</h3>
+    
+    <!-- 이미지 뷰어 컨트롤 -->
+    <div class="image-viewer-controls">
+        <app-button 
+            label="이미지 갤러리 열기" 
+            color="primary" 
+            icon="fas fa-images"
+            (clicked)="openImageViewer(0)">
+        </app-button>
+        
+        <app-button 
+            label="두 번째 이미지부터 열기" 
+            color="secondary" 
+            icon="fas fa-image"
+            (clicked)="openImageViewer(1)">
+        </app-button>
+        
+        <app-button 
+            label="샘플 이미지 추가" 
+            color="success" 
+            icon="fas fa-plus"
+            (clicked)="addSampleImage()">
+        </app-button>
+        
+        <app-button 
+            label="이미지 목록 초기화" 
+            color="danger" 
+            icon="fas fa-refresh"
+            (clicked)="resetImageList()">
+        </app-button>
+    </div>
+    
+    <!-- 썸네일 미리보기 -->
+    <div class="thumbnail-preview" *ngIf="imageViewerImages && imageViewerImages.length > 0">
+        <h4>이미지 목록 ({{ imageViewerImages.length }}개)</h4>
+        <div class="thumbnail-grid">
+            <div class="thumbnail-item" 
+                 *ngFor="let image of imageViewerImages; let i = index"
+                 (click)="openImageViewer(i)">
+                <img [src]="image.src" [alt]="image.alt" loading="lazy">
+                <div class="thumbnail-overlay">
+                    <i class="fas fa-search-plus"></i>
+                    <span>{{ image.title }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 이미지 뷰어 컴포넌트 -->
+<app-image-viewer
+    [images]="imageViewerImages"
+    [currentIndex]="imageViewerCurrentIndex"
+    [isVisible]="imageViewerVisible"
+    [config]="imageViewerConfig"
+    (close)="closeImageViewer()"
+    (indexChange)="onImageViewerIndexChange($event)"
+    (imageLoad)="onImageLoad($event)"
+    (imageError)="onImageError($event)">
+</app-image-viewer>

@@ -39,9 +39,9 @@ export const routes: Routes = [
   },
   
   {
-    path: 'settings',
+    path: 'loan/image-viewer',
     loadComponent: () =>
-      import('./features/settings/settings.component').then(m => m.SettingsComponent),
+      import('./features/loan/credit-limit/credit-limit.component').then(m => m.CreditLimitComponent),
     canActivate: [authGuard]
   },
   
