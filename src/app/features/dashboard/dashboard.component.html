@@ -26,18 +26,19 @@
     <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
     <app-datepicker label="날짜 선택"  locale="id" [(value)]="selectedDate"/>
 
-
-
 </div>
+
+<div class="group">
 <app-customer-search
     class="item"
     label=""
-    [width]="'100px'"
+    [id_width]="'100px'"
+    [name_width]="'300px'"
     formControlName="customer"
     (customerSelected)="onCustomerSelected($event)"
     (searchRequested)="onCustomerSearchRequested($event)">
 </app-customer-search>
-
+</div>
 <!-- 마스크 입력 컴포넌트 예시들 -->
 <app-mask-input
     class="item"
