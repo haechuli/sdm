@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-import { 
-  faMoneyBillWave, 
-  faPiggyBank, 
-  faUserCog, 
-  faTools, 
-  faIndustry, 
+import {
+  faMoneyBillWave,
+  faPiggyBank,
+  faUserCog,
+  faTools,
+  faIndustry,
   faUniversity,
   faCreditCard,
   faFileAlt,
@@ -89,7 +89,7 @@ export class SidenavComponent {
           icon: faFileInvoiceDollar,
           children: [
             { label: 'image-viewer', route: 'loan/image-viewer', icon: faUser },
-            { label: 'WriteOff', route: '/admin/roles', icon: faLock }
+            { label: 'WriteOff', route: '/sa01', icon: faLock }
           ]
         },
         {

@@ -3,7 +3,7 @@ import { authGuard } from './core/guard/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  
+
   {
     path: 'login',
     loadComponent: () =>
@@ -23,32 +23,46 @@ export const routes: Routes = [
       import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
     canActivate: [authGuard]
   },
-  
+
   {
     path: 'mergerequest',
     loadComponent: () =>
       import('./features/mergerequest/mergerequest.component').then(m => m.MergerequestComponent),
     canActivate: [authGuard]
   },
-  
+
   {
     path: 'loading-demo',
     loadComponent: () =>
       import('./features/loading-demo/loading-demo.component').then(m => m.LoadingDemoComponent),
     canActivate: [authGuard]
   },
-  
+
   {
     path: 'loan/image-viewer',
     loadComponent: () =>
       import('./features/loan/credit-limit/credit-limit.component').then(m => m.CreditLimitComponent),
     canActivate: [authGuard]
   },
-  
+
   {
     path: 'loan/disburse',
     loadComponent: () =>
       import('./features/loan/disburse/disburse.component').then(m => m.DisburseComponent),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'sa01',
+    loadComponent: () =>
+      import('./features/sales/sa01/sa01.component').then(m => m.Sa01Component),
+    canActivate: [authGuard]
+  },
+
+  {
+    path: 'sales/sa01',
+    loadComponent: () =>
+      import('./features/sales/sa01/sa01.component').then(m => m.Sa01Component),
     canActivate: [authGuard]
   },
 

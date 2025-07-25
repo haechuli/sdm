@@ -1,0 +1,140 @@
+<div class="sa01-container">
+  <!-- Search Form -->
+  <div class="search-section">
+    <div class="topbar-section">
+      <div class="form-row">
+        <!-- Branch -->
+        <div class="form-group">
+          <label for="branch">Branch</label>
+          <app-combobox
+            [(ngModel)]="searchCriteria.brNo"
+            [options]="branchOptions"
+            placeholder="Select Branch">
+          </app-combobox>
+        </div>
+
+        <!-- ShowRoom Name -->
+        <div class="form-group">
+          <label for="showroom">ShowRoom Name</label>
+          <app-input
+            [(ngModel)]="searchCriteria.name"
+            placeholder="Enter showroom name">
+          </app-input>
+        </div>
+
+        <!-- Search Button -->
+        <div class="form-group search-button-group">
+          <app-button
+            label="Search"
+            color="primary"
+            (clicked)="onSearch()">
+          </app-button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status</label>
+          <app-combobox
+            [(ngModel)]="searchCriteria.status"
+            [options]="statusOptions"
+            placeholder="Select Status">
+          </app-combobox>
+        </div>
+
+        <!-- Contact Name -->
+        <div class="form-group">
+          <label for="contactName">Contact Name</label>
+          <app-input
+            [(ngModel)]="searchCriteria.fullName"
+            placeholder="Enter contact name">
+          </app-input>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- Partner -->
+        <div class="form-group">
+          <label for="partner">Partner</label>
+          <app-combobox
+            [(ngModel)]="searchCriteria.dlrKndCd"
+            [options]="partnerKindOptions"
+            placeholder="Select Partner Kind">
+          </app-combobox>
+        </div>
+
+        <!-- Bank Account Name -->
+        <div class="form-group">
+          <label for="bankAccountName">Bank Account Name</label>
+          <app-input
+            [(ngModel)]="searchCriteria.bankAccountName"
+            placeholder="Enter bank account name">
+          </app-input>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- NPWP -->
+        <div class="form-group">
+          <label for="npwp">NPWP</label>
+          <app-input
+            [(ngModel)]="searchCriteria.npwp"
+            placeholder="Enter NPWP">
+          </app-input>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group address-group">
+          <label for="address">Address</label>
+          <app-input
+            [(ngModel)]="searchCriteria.address"
+            placeholder="Enter address">
+          </app-input>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partner List Section -->
+  <div class="grid-section">
+    <div class="section-header">
+      <div class="title-container">
+        <div class="title-arrow"></div>
+        <h3 class="section-title">Partner List</h3>
+      </div>
+      <app-button
+        label="Dealer Modify"
+        color="secondary"
+        [disabled]="!selectedDealer"
+        (clicked)="onDealerModify()">
+      </app-button>
+    </div>
+
+    <!-- Partner List Grid -->
+    <div class="grid-container">
+      <app-grid
+        [data]="dealerList"
+        [columns]="dealerListColumns"
+        [loading]="loading"
+        (rowClick)="onDealerSelect($event)"
+        class="dealer-grid">
+      </app-grid>
+    </div>
+
+    <!-- Partner Details Grid -->
+    <div class="grid-container">
+      <app-grid
+        [data]="dealerDetails"
+        [columns]="dealerDetailColumns"
+        (rowDoubleClick)="onDealerDetailDoubleClick($event)"
+        class="dealer-detail-grid">
+      </app-grid>
+    </div>
+  </div>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <app-loading></app-loading>
+  </div>
+</div>

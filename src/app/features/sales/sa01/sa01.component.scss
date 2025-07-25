@@ -1,0 +1,154 @@
+.sa01-container {
+  padding: 16px;
+  max-width: 1200px;
+  //margin: 0 auto;  // Center the container
+}
+
+/* Search Section */
+.search-section {
+  margin-bottom: 20px;
+}
+
+.topbar-section {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 4px;
+}
+
+.form-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 12px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+
+  &.search-button-group {
+    justify-content: flex-end;
+    min-width: auto;
+  }
+
+  &.address-group {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 4px;
+    color: #333;
+  }
+}
+
+/* Grid Section */
+.grid-section {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-arrow {
+  width: 14px;
+  height: 14px;
+  background-image: url('/images/title_arrow.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.grid-container {
+  border-bottom: 1px solid #ddd;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.dealer-grid {
+  height: 231px;
+}
+
+.dealer-detail-grid {
+  height: 142px;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .form-group {
+    min-width: auto;
+
+    &.search-button-group {
+      align-items: center;
+    }
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+/* Angular Material overrides if needed */
+::ng-deep {
+  .mat-form-field {
+    width: 100%;
+  }
+
+  .mat-select,
+  .mat-input-element {
+    font-size: 12px;
+  }
+}
