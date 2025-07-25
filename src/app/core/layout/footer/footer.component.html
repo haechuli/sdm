@@ -9,7 +9,7 @@
           [placeholder]="'select_branch' | translate"
           (selectionChange)="onBranchChanged($event)">
         </app-combobox>
-        
+
       </div>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="footer-section center">
       <div class="trading-date">
         <label class="footer-label">{{ 'trading_date' | translate }}:</label>
-        <app-datepicker label=""  locale="id" [(value)]="tradingDate"/>
+        <app-datepicker label=""   [(value)]="tradingDate"/>
       </div>
     </div>
 

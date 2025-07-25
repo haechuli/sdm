@@ -5,6 +5,7 @@ export interface Language {
   code: string;
   name: string;
   flag: string;
+  dateFormat: string;
 }
 
 @Injectable({
@@ -15,9 +16,9 @@ export class LanguageService {
   public currentLanguage$ = this.currentLanguageSubject.asObservable();
 
   private readonly languages: Language[] = [
-    { code: 'ko', name: '한국어', flag: 'https://flagcdn.com/w20/kr.png' },
-    { code: 'en', name: 'English', flag: 'https://flagcdn.com/w20/us.png' },
-    { code: 'id', name: 'Indonesia', flag: 'https://flagcdn.com/w20/id.png' },
+    { code: 'ko', name: '한국어', flag: 'https://flagcdn.com/w20/kr.png', dateFormat: 'YYYY-MM-DD' },
+    { code: 'en', name: 'English', flag: 'https://flagcdn.com/w20/us.png', dateFormat: 'MM/DD/YYYY' },
+    { code: 'id', name: 'Indonesia', flag: 'https://flagcdn.com/w20/id.png', dateFormat: 'DD/MM/YYYY' },
   ];
 
   private translations: { [key: string]: { [key: string]: string } } = {
@@ -47,6 +48,8 @@ export class LanguageService {
       'branch': '지점',
       'select_branch': '지점을 선택하세요',
       'trading_date': '거래일자',
+      'select_date': '날짜를 선택하세요',
+      'date_selection': '날짜 선택',
       'current_time': '현재시간',
       'system_online': '시스템 정상',
       'customer_search': '고객 검색',
@@ -86,6 +89,8 @@ export class LanguageService {
       'branch': 'Branch',
       'select_branch': 'Select Branch',
       'trading_date': 'Trading Date',
+      'select_date': 'Please select a date',
+      'date_selection': 'Date Selection',
       'current_time': 'Current Time',
       'system_online': 'System Online',
       'customer_search': 'Customer Search',
@@ -125,6 +130,8 @@ export class LanguageService {
       'branch': 'Cabang',
       'select_branch': 'Pilih Cabang',
       'trading_date': 'Tanggal Transaksi',
+      'select_date': 'Silakan pilih tanggal',
+      'date_selection': 'Pemilihan Tanggal',
       'current_time': 'Waktu Saat Ini',
       'system_online': 'Sistem Online',
       'customer_search': 'Pencarian Pelanggan',

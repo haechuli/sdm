@@ -1,24 +1,25 @@
 <div class="datepicker">
-  <label *ngIf="label">{{ label }}</label>
+  <label *ngIf="label">{{ label | translate }}</label>
   <div class="input-wrapper" #inputWrapper (click)="toggleCalendar()">
     <input
       readonly
-      [value]="value ? (value | date: 'dd-MM-yyyy') : ''"
+      [value]="value ? (value | date: dateFormat) : ''"
       class="input-box"
+      [placeholder]="placeholder"
     />
     <div class="calendar-icon">📅</div>
   </div>
 
-  <div 
-    class="calendar" 
+  <div
+    class="calendar"
     #calendar
     *ngIf="isOpen"
     [class.show-above]="showAbove"
   >
     <div class="calendar-header">
-      <button (click)="prevMonth()">◀</button>
-      <span>{{ getMonthName() }}</span>
-      <button (click)="nextMonth()">▶</button>
+      <button (click)="prevMonth()" type="button" class="nav-button">◀</button>
+      <span class="month-year">{{ getMonthName() }}</span>
+      <button (click)="nextMonth()" type="button" class="nav-button">▶</button>
     </div>
 
     <table class="calendar-grid">
@@ -32,8 +33,10 @@
           <td *ngFor="let day of week">
             <button
               *ngIf="day"
-              [class.today]="value && isSameDate(day, value)"
+              [class.today]="value && day && isSameDate(day, value)"
+              [class.selected]="value && day && isSameDate(day, value)"
               (click)="selectDate(day)"
+              type="button"
             >
               {{ day.getDate() }}
             </button>
