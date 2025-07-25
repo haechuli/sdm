@@ -24,7 +24,7 @@ export class LanguageService {
   private translations: { [key: string]: { [key: string]: string } } = {
     ko: {
       'admin_system': '관리자 시스템',
-      'run': '실행',
+      'execute': '실행',
       'user_name': '홍길동',
       'dashboard': '대시보드',
       'loan': '대출',
@@ -65,7 +65,7 @@ export class LanguageService {
     },
     en: {
       'admin_system': 'Admin System',
-      'run': 'Run',
+      'execute': 'Execute',
       'user_name': 'Hong Gil-dong',
       'dashboard': 'Dashboard',
       'loan': 'Loan',
@@ -106,7 +106,7 @@ export class LanguageService {
     },
     id: {
       'admin_system': 'Admin System',
-      'run': 'Run',
+      'execute': 'Execute',
       'user_name': 'Hong Gil-dong',
       'dashboard': 'Dashboard',
       'loan': 'Loan',

@@ -8,6 +8,7 @@ import {  ControlValueAccessor,  FormsModule,  NG_VALUE_ACCESSOR} from '@angular
   imports: [CommonModule, FormsModule],
   template: `
     <button
+      [style.width]="width"
       [disabled]="disabled"
       [ngClass]="[colorClass, 'btn']"
       (click)="handleClick()"
@@ -23,7 +24,7 @@ export class ButtonComponent {
   @Input() color: 'primary' | 'secondary' | 'success' | 'danger' = 'primary';
   @Input() icon?: string;
   @Input() disabled: boolean = false;
-
+  @Input() width: string = '100px';     // ✅ 기본값 지정 가능
   @Output() clicked = new EventEmitter<void>();
 
   get colorClass(): string {

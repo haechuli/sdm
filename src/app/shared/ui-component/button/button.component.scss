@@ -1,6 +1,7 @@
  .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
       padding: 6px 10px;
       border: none;
@@ -9,6 +10,7 @@
       cursor: pointer;
       color: white;
       transition: background-color 0.2s ease-in-out;
+      text-align: center;
     }
 
 .btn:disabled {
@@ -45,6 +47,5 @@
 }
 
 .btn-icon {
-   // font-size: 18px;
-    
+    margin-right: 4px;
 }

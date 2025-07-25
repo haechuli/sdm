@@ -7,6 +7,7 @@
   </app-page-title>
   <!-- Search Form -->
   <div class="search-section">
+
     <div class="form-grid">
 
         <!-- Branch -->
@@ -36,6 +37,7 @@
             class="item"
             label="Search"
             color="primary"
+            [width]="'100px'"
             (clicked)="onSearch()">
           </app-button>
 
@@ -51,6 +53,7 @@
          <label class="item" for="contactName">Contact Name</label>
           <app-input
             class="item"
+            [width]="'300px'"
             [(ngModel)]="searchCriteria.fullName"
             placeholder="Enter contact name">
           </app-input>
@@ -69,6 +72,7 @@
           <label class="item" for="bankAccountName">Bank Account Name</label>
           <app-input
             class="item"
+            [width]="'300px'"
             [(ngModel)]="searchCriteria.bankAccountName"
             placeholder="Enter bank account name">
           </app-input>
@@ -83,6 +87,7 @@
 
           <label class="item" for="address">Address</label>
           <app-input
+            [width]="'300px'"
             [(ngModel)]="searchCriteria.address"
             placeholder="Enter address">
           </app-input>
@@ -90,7 +95,7 @@
     </div>
 
 
-
+  <div class="row-gap"></div>
 
 
   <!-- Partner List Section -->
@@ -103,6 +108,7 @@
       <app-button
         label="Dealer Modify"
         color="secondary"
+        [width]="'150px'"
         [disabled]="!selectedDealer"
         (clicked)="onDealerModify()">
       </app-button>

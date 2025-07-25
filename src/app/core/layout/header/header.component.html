@@ -2,9 +2,10 @@
   <div class="left">{{ 'admin_system' | translate }}</div>
   <div class="right">
     <app-language-selector></app-language-selector>
-    <app-theme-selector></app-theme-selector>
+
     <span class="user-info" *ngIf="currentUser">{{ currentUser.name }}</span>
-    <app-button [label]="'run' | translate" (clicked)="run()"></app-button>
-    <app-button [label]="'logout' | translate" color="secondary" (clicked)="logout()"></app-button>
+    <app-button [width]="'100px'" [label]="'execute' | translate" (clicked)="run()"></app-button>
+    <app-button [width]="'100px'" [label]="'logout' | translate" color="secondary" (clicked)="logout()"></app-button>
+    <app-theme-selector></app-theme-selector>
   </div>
 </header>
