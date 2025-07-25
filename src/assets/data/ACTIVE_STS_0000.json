@@ -1,0 +1,6 @@
+[
+  { "code": "Y", "label": "활성" },
+  { "code": "N", "label": "비활성" },
+  { "code": "S", "label": "중지" },
+  { "code": "P", "label": "보류" }
+]

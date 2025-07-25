@@ -1,0 +1,49 @@
+<div class="group-container" 
+     [class]="'padding-' + padding"
+     [class.bordered]="border"
+     [class.shadowed]="shadow"
+     [class.rounded]="rounded"
+     [style.width]="width"
+     [style.height]="height"
+     [style.min-height]="minHeight"
+     [style.max-height]="maxHeight">
+
+  <!-- Group Header -->
+  <div class="group-header" 
+       *ngIf="title || subtitle || icon || collapsible"
+       [class]="'header-' + headerBackground"
+       [class.clickable]="collapsible"
+       (click)="toggleCollapse()">
+    
+    <div class="header-left">
+      <!-- Icon -->
+      <div class="header-icon" *ngIf="icon">
+        <i [class]="icon"></i>
+      </div>
+      
+      <!-- Title and Subtitle -->
+      <div class="header-text">
+        <h3 class="group-title" *ngIf="title">{{ title }}</h3>
+        <p class="group-subtitle" *ngIf="subtitle">{{ subtitle }}</p>
+      </div>
+    </div>
+    
+    <!-- Collapse Toggle -->
+    <div class="header-right" *ngIf="collapsible">
+      <div class="collapse-toggle" [class.rotated]="isCollapsed">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Group Content -->
+  <div class="group-content" 
+       [class.collapsed]="isCollapsed"
+       [class.no-header]="!title && !subtitle && !icon && !collapsible">
+    
+    <div class="content-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+</div>

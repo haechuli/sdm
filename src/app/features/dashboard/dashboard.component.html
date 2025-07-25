@@ -7,51 +7,77 @@
 </app-page-title>
 
 <form [formGroup]="form">
-<div class="container">
 
-    <app-input class="item" label="이메일" placeholder="example@email.com" formControlName="email" ></app-input>
-    <app-combobox
+<!-- 기본 입력 폼 그룹 -->
+<app-group 
+    title=""
+    subtitle=""
+    [padding]="'none'"
+    icon=""
+    headerBackground="primary">
+    
+    <div class="container">
+        <app-input class="item" label="이메일" placeholder="example@email.com" formControlName="email"></app-input>
+        <app-combobox
+            class="item"
+            formControlName="country"
+            [options]="countries"
+            placeholder="Select country"
+            (selectionChange)="onCountryChanged($event)">
+        </app-combobox>
+        <app-number-input class="item" formControlName="numberInput" align="left" label="금액왼쪽입력"></app-number-input>
+        <app-number-input class="item" formControlName="numberInput2" align="left" label="금액"></app-number-input>
+        
+        <app-button class="item" label="저장" color="primary" icon="fas fa-save" (clicked)="onSave()"></app-button>
+        <app-button label="삭제" color="danger" icon="fas fa-trash" [disabled]="true" (clicked)="onDelete()"></app-button>
+        <app-datepicker label="" locale="id" [(value)]="selectedDate"></app-datepicker>
+    </div>
+</app-group>
+
+<!-- 고객 검색 그룹 -->
+<app-group 
+    title="고객 검색"
+    subtitle="고객 정보를 검색하고 선택하세요"
+    icon="fas fa-search"
+    headerBackground="secondary">
+    
+    <app-customer-search
         class="item"
-        formControlName="country"
-        [options]="countries"
-        placeholder="Select country"
-        (selectionChange)="onCountryChanged($event)">
-    </app-combobox>
-    <app-number-input class="item" formControlName="numberInput"  align="left" label="금액왼쪽입력"></app-number-input>
-    <app-number-input class="item" formControlName="numberInput2"  align="left" label="금액"></app-number-input>
+        label=""
+        [id_width]="'100px'"
+        [name_width]="'300px'"
+        formControlName="customer"
+        (customerSelected)="onCustomerSelected($event)"
+        (searchRequested)="onCustomerSearchRequested($event)">
+    </app-customer-search>
+</app-group>
 
+<!-- 연락처 정보 그룹 -->
+<app-group 
+    title="연락처 정보"
+    subtitle="전화번호 등 연락처 정보를 입력하세요"
+    icon="fas fa-phone"
+    [collapsible]="true">
+    
+    <!-- 마스크 입력 컴포넌트 예시들 -->
+    <app-mask-input
+        class="item"
+        label="전화번호"
+        mask="000-0000-0000"
+        placeholder="010-1234-5678"
+        width="200px"
+        formControlName="phone">
+    </app-mask-input>
+</app-group>
 
-
-    <app-button  class="item" label="저장"  color="primary"  icon="fas fa-save"  (clicked)="onSave()"/>
-    <app-button   label="삭제"  color="danger"  icon="fas fa-trash"  [disabled]="true"  (clicked)="onDelete()"/>
-    <app-datepicker label=""  locale="id" [(value)]="selectedDate"/>
-
-</div>
-
-<div class="group">
-<app-customer-search
-    class="item"
-    label=""
-    [id_width]="'100px'"
-    [name_width]="'300px'"
-    formControlName="customer"
-    (customerSelected)="onCustomerSelected($event)"
-    (searchRequested)="onCustomerSearchRequested($event)">
-</app-customer-search>
-</div>
-<!-- 마스크 입력 컴포넌트 예시들 -->
-<app-mask-input
-    class="item"
-    label="전화번호"
-    mask="000-0000-0000"
-    placeholder="010-1234-5678"
-    width="200px"
-    formControlName="phone">
-</app-mask-input>
-
-
-
-<!-- 파일 업로드 컴포넌트 예시들 -->
+<!-- 파일 업로드 그룹 -->
+<app-group 
+    title="파일 업로드"
+    subtitle="문서와 이미지를 업로드하세요"
+    icon="fas fa-upload"
+    [collapsible]="true">
+    
+    <!-- 파일 업로드 컴포넌트 예시들 -->
     <app-file-upload
         class="item"
         label="문서 업로드"
@@ -79,13 +105,18 @@
         formControlName="profileImage"
         (filesSelected)="onImageSelected($event)">
     </app-file-upload>
+</app-group>
 
 </form>
 
-<!-- Excel 스타일 그리드 예시 -->
-<!-- <div class="grid-section"> -->
-<div class="group">
-    <h3>고객 목록 (Excel 스타일 그리드)</h3>
+<!-- 데이터 그리드 그룹 -->
+<app-group 
+    title="고객 목록"
+    subtitle="Excel 스타일 그리드로 고객 데이터를 관리하세요"
+    icon="fas fa-table"
+    headerBackground="dark"
+    [shadow]="true">
+    
     <app-grid
         [columns]="gridColumns"
         [data]="gridData"
@@ -99,11 +130,16 @@
         (rowDoubleClick)="onGridRowDoubleClick($event)"
         (selectedRowsChange)="onGridSelectionChange($event)">
     </app-grid>
-</div>
+</app-group>
 
-<!-- 이미지 뷰어 데모 섹션 -->
-<div class="group">
-    <h3>이미지 뷰어 데모</h3>
+<!-- 이미지 뷰어 데모 그룹 -->
+<app-group 
+    title="이미지 뷰어 데모"
+    subtitle=""
+    icon="fas fa-images"
+    headerBackground="secondary"
+    [collapsible]="true"
+    [shadow]="true">
     
     <!-- 이미지 뷰어 컨트롤 -->
     <div class="image-viewer-controls">
@@ -151,7 +187,7 @@
             </div>
         </div>
     </div>
-</div>
+</app-group>
 
 <!-- 이미지 뷰어 컴포넌트 -->
 <app-image-viewer

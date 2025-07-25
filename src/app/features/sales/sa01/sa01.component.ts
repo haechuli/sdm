@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Sa01Service } from './sa01.service';
 import { DealerSearchCriteria, DealerInfo, DealerDetail, ComboOption } from './sa01.interface';
 
@@ -11,31 +11,46 @@ import { InputComponent } from '../../../shared/ui-component/input/input.compone
 import { GridComponent } from '../../../shared/ui-component/grid/grid.component';
 import { LoadingComponent } from '../../../shared/ui-component/loading/loading.component';
 import { PageTitleComponent } from '../../../shared/ui-component/page-title/page-title.component';
+import { GroupComponent } from '../../../shared/ui-component/group/group.component';
 
 @Component({
   selector: 'app-sa01',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     ButtonComponent,
     ComboBoxComponent,
     InputComponent,
     GridComponent,
     LoadingComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    GroupComponent
   ],
   templateUrl: './sa01.component.html',
   styleUrls: ['./sa01.component.scss']
 })
 export class Sa01Component implements OnInit {
 
+   fb = inject(FormBuilder);
+  
+    dealerSearchGroup = this.fb.group({
+      brNo: [''],
+      showroom:[''],
+      status: [''],
+      contactName: [''],
+      dlrKndCd: [''],
+      bankAccountName: [''],
+      npwp: [''],
+      address: ['']
+    });
+    
   // 검색 조건
   searchCriteria: DealerSearchCriteria = {
     brNo: '',
-    name: '',
+    showroom: '',
     status: '',
-    fullName: '',
+    contactName: '',
     dlrKndCd: '',
     bankAccountName: '',
     npwp: '',
@@ -95,6 +110,8 @@ export class Sa01Component implements OnInit {
   private loadComboOptions(): void {
     this.sa01Service.getBranchOptions().subscribe({
       next: (data) => {
+        console.log('Branch Options:', data);
+        
         this.branchOptions = data.map(item => ({
           label: item.codeNm,
           value: item.code
@@ -127,6 +144,22 @@ export class Sa01Component implements OnInit {
   // 딜러 검색
   onSearch(): void {
     this.loading = true;
+
+    console.log(this.dealerSearchGroup.value);
+    
+    const formValue = this.dealerSearchGroup.value;
+    this.searchCriteria = {
+      brNo: formValue.brNo ?? '',
+      showroom: formValue.showroom ?? '',
+      status: formValue.status ?? '',
+      contactName: formValue.contactName ?? '',
+      dlrKndCd: formValue.dlrKndCd ?? '',
+      bankAccountName: formValue.bankAccountName ?? '',
+      npwp: formValue.npwp ?? '',
+      address: formValue.address ?? ''
+    };
+
+    // 딜러 목록 검색
     this.sa01Service.searchDealers(this.searchCriteria).subscribe({
       next: (data) => {
         this.dealerList = data;
@@ -174,9 +207,9 @@ export class Sa01Component implements OnInit {
   onReset(): void {
     this.searchCriteria = {
       brNo: '',
-      name: '',
+      showroom: '',
       status: '',
-      fullName: '',
+      contactName: '',
       dlrKndCd: '',
       bankAccountName: '',
       npwp: '',

@@ -1,8 +1,8 @@
 export interface DealerSearchCriteria {
   brNo: string;
-  name: string;
+  showroom: string;
   status: string;
-  fullName: string;
+  contactName: string;
   dlrKndCd: string;
   bankAccountName: string;
   npwp: string;

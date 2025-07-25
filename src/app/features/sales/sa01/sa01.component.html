@@ -6,33 +6,37 @@
       size="small">
   </app-page-title>
   <!-- Search Form -->
-  <div class="search-section">
 
+  <div [formGroup]="dealerSearchGroup">
+   <!-- 기본 입력 폼 그룹 -->
+  <app-group 
+    title="딜러 검색"
+    subtitle=""
+    [padding]="'none'"
+    icon=""
+    headerBackground="primary">
+     
     <div class="form-grid">
-
+      
         <!-- Branch -->
-
           <label class="item" for="branch">Branch</label>
           <app-combobox
+            formControlName="brNo"
             class="item"
-            [(ngModel)]="searchCriteria.brNo"
             [options]="branchOptions"
             placeholder="Select Branch">
           </app-combobox>
 
-
         <!-- ShowRoom Name -->
-
           <label class="item" for="showroom">ShowRoom Name</label>
           <app-input
+            formControlName="showroom"
             class="item"
             [width]="'300px'"
-            [(ngModel)]="searchCriteria.name"
             placeholder="Enter showroom name">
           </app-input>
 
         <!-- Search Button -->
-
           <app-button
             class="item"
             label="Search"
@@ -41,20 +45,19 @@
             (clicked)="onSearch()">
           </app-button>
 
-
         <label class="item" for="status">Status</label>
           <app-combobox
+            formControlName="status"
             class="item"
-            [(ngModel)]="searchCriteria.status"
             [options]="statusOptions"
             placeholder="Select Status">
           </app-combobox>
 
          <label class="item" for="contactName">Contact Name</label>
           <app-input
+            formControlName="contactName"
             class="item"
             [width]="'300px'"
-            [(ngModel)]="searchCriteria.fullName"
             placeholder="Enter contact name">
           </app-input>
          <div class="item"></div>
@@ -62,8 +65,8 @@
          <!-- Partner -->
          <label class="item" for="partner">Partner</label>
           <app-combobox
+            formControlName="dlrKndCd"
             class="item"
-            [(ngModel)]="searchCriteria.dlrKndCd"
             [options]="partnerKindOptions"
             placeholder="Select Partner Kind">
           </app-combobox>
@@ -71,29 +74,31 @@
            <!-- Bank Account Name -->
           <label class="item" for="bankAccountName">Bank Account Name</label>
           <app-input
+            formControlName="bankAccountName"
             class="item"
             [width]="'300px'"
-            [(ngModel)]="searchCriteria.bankAccountName"
             placeholder="Enter bank account name">
           </app-input>
           <div class="item"></div>
 
          <label class="item" for="npwp">NPWP</label>
           <app-input
+            formControlName="npwp"
             class="item"
-            [(ngModel)]="searchCriteria.npwp"
             placeholder="Enter NPWP">
           </app-input>
 
           <label class="item" for="address">Address</label>
           <app-input
+            formControlName="address"
             [width]="'300px'"
-            [(ngModel)]="searchCriteria.address"
             placeholder="Enter address">
           </app-input>
           <div class="item"></div>
+         
     </div>
-
+  </app-group>
+  </div> 
 
   <div class="row-gap"></div>
 
@@ -143,4 +148,4 @@
   <div class="loading-overlay" *ngIf="loading">
     <app-loading></app-loading>
   </div>
-</div>
+

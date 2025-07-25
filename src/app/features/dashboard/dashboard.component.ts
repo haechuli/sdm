@@ -15,6 +15,7 @@ import { PageTitleComponent } from '../../shared/ui-component/page-title/page-ti
 import { FileUploadComponent } from '../../shared/ui-component/file-upload/file-upload.component';
 import { FileUploadItem } from '../../shared/ui-component/file-upload/file-upload.component';
 import { ImageViewerComponent, ImageViewerImage, ImageViewerConfig } from '../../shared/ui-component/image-viewer/image-viewer.component';
+import { GroupComponent } from '../../shared/ui-component/group/group.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,7 +32,8 @@ import { ImageViewerComponent, ImageViewerImage, ImageViewerConfig } from '../..
             MaskInputComponent,
             PageTitleComponent,
             FileUploadComponent,
-            ImageViewerComponent],
+            ImageViewerComponent,
+            GroupComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
