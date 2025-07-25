@@ -81,15 +81,15 @@ export class SidenavComponent {
       ]
     },
     {
-      label: 'Sales',
+      label: 'sales',
       icon: faPiggyBank,
       children: [
         {
-          label: 'Dealer',
+          label: 'dealer',
           icon: faFileInvoiceDollar,
           children: [
             { label: 'image-viewer', route: 'loan/image-viewer', icon: faUser },
-            { label: 'Dealer Inquiry', route: '/sa01', icon: faLock }
+            { label: 'dealer_inquiry', route: '/sa01', icon: faLock }
           ]
         },
         {
@@ -102,7 +102,7 @@ export class SidenavComponent {
       ]
     },
     {
-      label: 'Account',
+      label: 'account',
       icon: faUserCog,
       children: [
         {
@@ -144,7 +144,7 @@ export class SidenavComponent {
       ]
     },
     {
-      label: 'Factory',
+      label: 'factory',
       icon: faIndustry,
       children: [
         {
@@ -165,7 +165,7 @@ export class SidenavComponent {
       ]
     },
     {
-      label: 'Treasery',
+      label: 'treasury',
       icon: faUniversity,
       children: [
         {

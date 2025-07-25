@@ -61,7 +61,17 @@ export class LanguageService {
       'select': '선택',
       'close': '닫기',
       'no_customers_found': '검색된 고객이 없습니다',
-      'enter_customer_id': '고객번호를 입력하세요'
+      'enter_customer_id': '고객번호를 입력하세요',
+      'account': '계좌',
+      'sales': '판매',
+      'dealer': '딜러',
+      'dealer_inquiry': '딜러 조회',
+      'dealer_details': '딜러 상세',
+      'factory': '상품',
+      'treasury': '자금',
+      'common': '공통',
+
+
     },
     en: {
       'admin_system': 'Admin System',
@@ -102,7 +112,15 @@ export class LanguageService {
       'select': 'Select',
       'close': 'Close',
       'no_customers_found': 'No customers found',
-      'enter_customer_id': 'Enter Customer ID'
+      'enter_customer_id': 'Enter Customer ID',
+      'account': 'Account',
+      'sales': 'Sales',
+      'dealer': 'Dealer',
+      'dealer_inquiry': 'Dealer Inquiry',
+      'dealer_details': 'Dealer Details',
+      'factory': 'Factory',
+      'treasury': 'Treasury',
+      'common': 'Common',
     },
     id: {
       'admin_system': 'Admin System',
@@ -143,7 +161,15 @@ export class LanguageService {
       'select': 'Pilih',
       'close': 'Tutup',
       'no_customers_found': 'Tidak ada pelanggan ditemukan',
-      'enter_customer_id': 'Masukkan ID Pelanggan'
+      'enter_customer_id': 'Masukkan ID Pelanggan',
+      'account': 'Akun',
+      'sales': 'Penjualan',
+      'dealer': 'Dealer',
+      'dealer_inquiry': 'Penyidikan Dealer',
+      'dealer_details': 'Detail Dealer',
+      'factory': 'Pabrik',
+      'treasury': 'Kas',
+      'common': 'Umum',
     },
   };
 
