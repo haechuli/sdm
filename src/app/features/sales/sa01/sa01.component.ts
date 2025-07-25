@@ -10,6 +10,7 @@ import { ComboBoxComponent } from '../../../shared/ui-component/combobox/combobo
 import { InputComponent } from '../../../shared/ui-component/input/input.component';
 import { GridComponent } from '../../../shared/ui-component/grid/grid.component';
 import { LoadingComponent } from '../../../shared/ui-component/loading/loading.component';
+import { PageTitleComponent } from '../../../shared/ui-component/page-title/page-title.component';
 
 @Component({
   selector: 'app-sa01',
@@ -21,7 +22,8 @@ import { LoadingComponent } from '../../../shared/ui-component/loading/loading.c
     ComboBoxComponent,
     InputComponent,
     GridComponent,
-    LoadingComponent
+    LoadingComponent,
+    PageTitleComponent
   ],
   templateUrl: './sa01.component.html',
   styleUrls: ['./sa01.component.scss']

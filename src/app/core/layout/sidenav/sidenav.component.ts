@@ -81,15 +81,15 @@ export class SidenavComponent {
       ]
     },
     {
-      label: 'Deposit',
+      label: 'Sales',
       icon: faPiggyBank,
       children: [
         {
-          label: 'WriteOff',
+          label: 'Dealer',
           icon: faFileInvoiceDollar,
           children: [
             { label: 'image-viewer', route: 'loan/image-viewer', icon: faUser },
-            { label: 'WriteOff', route: '/sa01', icon: faLock }
+            { label: 'Dealer Inquiry', route: '/sa01', icon: faLock }
           ]
         },
         {
