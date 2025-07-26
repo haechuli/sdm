@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DealerSearchCriteria, DealerInfo, DealerDetail, ComboOption } from './sa01.interface';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Sa01Service {
 
-  private readonly dataBasePath = '/assets/data';
-  private readonly apiBasePath = '/api';
+  private readonly dataBasePath = environment.assetsUrl;
+  private readonly apiBasePath = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 
@@ -29,7 +30,7 @@ export class Sa01Service {
 
   // API 호출 메서드들 (서버 API)
   searchDealers(criteria: DealerSearchCriteria): Observable<DealerInfo[]> {
-    return this.http.post<DealerInfo[]>(`${this.apiBasePath}/dealer/search`, criteria);
+    return this.http.post<DealerInfo[]>(`${this.apiBasePath}/dealer/list`, { params: criteria });
   }
 
   // 딜러 상세 정보 조회

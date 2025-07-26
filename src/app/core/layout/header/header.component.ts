@@ -5,7 +5,7 @@ import { ButtonComponent } from '../../../shared/ui-component/button/button.comp
 import { LanguageSelectorComponent } from '../../../shared/ui-component/language-selector/language-selector.component';
 import { ThemeSelectorComponent } from '../../../shared/ui-component/theme-selector/theme-selector.component';
 import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
-import { AuthService, User } from '../../auth/auth.service';
+import { AuthService, UserInfo } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ import { AuthService, User } from '../../auth/auth.service';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  currentUser: User | null = null;
+  currentUser: UserInfo | null = null;
   private subscription: Subscription = new Subscription();
 
   constructor(private authService: AuthService) {}

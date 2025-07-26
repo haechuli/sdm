@@ -32,9 +32,9 @@ import { GroupComponent } from '../../../shared/ui-component/group/group.compone
 })
 export class Sa01Component implements OnInit {
 
-   fb = inject(FormBuilder);
+  fb = inject(FormBuilder);
   
-    dealerSearchGroup = this.fb.group({
+  dealerSearchGroup = this.fb.group({
       brNo: [''],
       showroom:[''],
       status: [''],
@@ -43,7 +43,7 @@ export class Sa01Component implements OnInit {
       bankAccountName: [''],
       npwp: [''],
       address: ['']
-    });
+  });
     
   // 검색 조건
   searchCriteria: DealerSearchCriteria = {
@@ -176,9 +176,9 @@ export class Sa01Component implements OnInit {
 
   // 딜러 선택 (그리드 클릭)
   onDealerSelect(row: any): void {
-    const dealer = row as DealerInfo;
-    this.selectedDealer = dealer;
-    this.loadDealerDetails(dealer.dealerId);
+    // const dealer = row as DealerInfo;
+    // this.selectedDealer = dealer;
+    // this.loadDealerDetails(dealer.dealerId);
   }
 
   // 딜러 상세 정보 로드

@@ -1,9 +1,11 @@
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, of, catchError, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
-export interface User {
+export interface UserInfo {
   id: string;
   name: string;
   email?: string;
@@ -14,49 +16,63 @@ export interface LoginCredentials {
   password: string;
 }
 
+export interface LoginResponse {
+  success: boolean;
+  token?: string;
+  userInfo?: UserInfo;
+  message?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
-  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  private currentUserSubject = new BehaviorSubject<UserInfo | null>(null);
 
   public isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  // 테스트용 사용자 데이터
-  private readonly testUsers = [
-    { id: 'admin', password: 'admin123', name: '관리자', email: 'admin@company.com' },
-    { id: 'user1', password: 'password', name: '홍길동', email: 'hong@company.com' },
-    { id: 'test', password: 'test', name: '테스트 사용자', email: 'test@company.com' }
-  ];
+  private readonly apiUrl = environment.apiUrl;
 
-  constructor(private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {
     this.checkAuthStatus();
   }
 
-  login(credentials: LoginCredentials): Observable<{ success: boolean; message?: string; user?: User }> {
-    const user = this.testUsers.find(u => 
-      u.id === credentials.userId && u.password === credentials.password
-    );
+  login(credentials: LoginCredentials): Observable<{ success: boolean; message?: string; user?: UserInfo }> {
+    return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, credentials)
+      .pipe(
+        map(response => {
+          if (response.token && response.userInfo) {
+            // JWT 토큰과 사용자 정보를 로컬 스토리지에 저장
+            localStorage.setItem('jwt_token', response.token);
+            localStorage.setItem('current_user', JSON.stringify(response.userInfo));
 
-    if (user) {
-      const authUser: User = {
-        id: user.id,
-        name: user.name,
-        email: user.email
-      };
+            this.isAuthenticatedSubject.next(true);
+            this.currentUserSubject.next(response.userInfo);
 
-      // 토큰과 사용자 정보를 로컬 스토리지에 저장
-      const token = this.generateToken(user.id);
-      localStorage.setItem('jwt_token', token);
-      localStorage.setItem('current_user', JSON.stringify(authUser));
-
-      this.isAuthenticatedSubject.next(true);
-      this.currentUserSubject.next(authUser);
-
-      return of({ success: true, user: authUser });
-    } else {
-      return of({ success: false, message: 'invalid_credentials' });
-    }
+            return { success: true, user: response.userInfo };
+          } else {
+            return { success: false, message: response.message || 'login_failed' };
+          }
+        }),
+        catchError((error) => {
+          console.error('Login error:', error);
+          let errorMessage = 'login_failed';
+          
+          // HTTP 상태 코드에 따른 에러 메시지 처리
+          if (error.status === 401) {
+            errorMessage = 'invalid_credentials';
+          } else if (error.status === 403) {
+            errorMessage = 'access_denied';
+          } else if (error.status === 0) {
+            errorMessage = 'network_error';
+          }
+          
+          return of({ success: false, message: errorMessage });
+        })
+      );
   }
 
   logout(): void {
@@ -75,7 +91,7 @@ export class AuthService {
     return this.isAuthenticatedSubject.value;
   }
 
-  getCurrentUser(): User | null {
+  getCurrentUser(): UserInfo | null {
     return this.currentUserSubject.value;
   }
 
@@ -85,23 +101,12 @@ export class AuthService {
 
     if (token && userData) {
       try {
-        const user = JSON.parse(userData) as User;
+        const user = JSON.parse(userData) as UserInfo;
         this.isAuthenticatedSubject.next(true);
         this.currentUserSubject.next(user);
       } catch (error) {
         this.logout();
       }
     }
-  }
-
-  private generateToken(userId: string): string {
-    // 실제 환경에서는 서버에서 JWT 토큰을 생성해야 합니다
-    const header = btoa(JSON.stringify({ alg: 'HS256', typ: 'JWT' }));
-    const payload = btoa(JSON.stringify({ 
-      sub: userId, 
-      iat: Date.now(),
-      exp: Date.now() + (24 * 60 * 60 * 1000) // 24시간
-    }));
-    return `${header}.${payload}.fake-signature`;
   }
 }
