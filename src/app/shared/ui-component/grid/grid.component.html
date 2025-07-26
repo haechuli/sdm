@@ -40,7 +40,8 @@
     <!-- Virtual Scroll Mode -->
     <cdk-virtual-scroll-viewport *ngIf="virtualScroll"
                                  itemSize="40"
-                                 class="grid-virtual-scroll-viewport"> 
+                                 class="grid-virtual-scroll-viewport"
+                                 (scroll)="onViewportScroll($event)"> 
       <div class="grid-table-wrapper">
         <table class="grid-table">
           <tbody>
@@ -81,7 +82,9 @@
     </cdk-virtual-scroll-viewport>
 
     <!-- Regular Scroll Mode -->
-    <div *ngIf="!virtualScroll" class="grid-regular-scroll">
+    <div *ngIf="!virtualScroll" 
+         class="grid-regular-scroll"
+         (scroll)="onViewportScroll($event)">
       <div class="grid-table-wrapper">
         <table class="grid-table">
           <tbody>
